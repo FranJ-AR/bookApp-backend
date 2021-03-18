@@ -7,7 +7,6 @@ import com.example.entity.User;
 
 public interface CustomUserRepository {
 	
-	@Query("SELECT u FROM User u WHERE u.name = :name")
-	public User findByName(@Param("name") String name);
+	
 
 }
