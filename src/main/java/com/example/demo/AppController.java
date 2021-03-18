@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.auth.AuthenticationRequest;
 import com.example.auth.AuthenticationResponse;
+import com.example.entity.Author;
 import com.example.entity.Book;
 import com.example.entity.Category;
 import com.example.entity.Subcategory;
@@ -32,146 +33,177 @@ import com.example.exceptions.CustomUserPasswordSizeException;
 @Controller
 //@RequestMapping("/")
 public class AppController {
-	
+
 	@Autowired
-	UserService userService;
-	
+	private UserService userService;
+
 	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder1;
-	
+	private BCryptPasswordEncoder bCryptPasswordEncoder1;
+
 	@Autowired
-	CustomValidatorService customValidatorService;
-	
+	private CustomValidatorService customValidatorService;
+
 	@Autowired
-	BookService BookService;
-	
+	private BookService BookService;
+
 	@Autowired
-	CategoryService categoryService;
-	
+	private CategoryService categoryService;
+
 	@Autowired
-	SubcategoryService subcategoryService;
-	
+	private SubcategoryService subcategoryService;
+
+	@Autowired
+	private AuthorService authorService;
+
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(value = "/private-action", produces="application/json")
-	public ResponseEntity<Object> logged()
-    {
-		
+	@GetMapping(value = "/private-action", produces = "application/json")
+	public ResponseEntity<Object> logged() {
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-         
-		User user = new User(null,currentPrincipalName,"1");
-       
-        return new ResponseEntity<Object>(user, HttpStatus.OK);
-        
-    }
-	
+
+		User user = new User(null, currentPrincipalName, "1");
+
+		return new ResponseEntity<Object>(user, HttpStatus.OK);
+
+	}
+
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(value = "/public-action", produces="application/json")
-	public ResponseEntity<Object> anonym()
-    {
-         
-		User user = new User(null,"Anonym","1");
-       
-        return new ResponseEntity<Object>(user, HttpStatus.OK);
-    }
-	
+	@GetMapping(value = "/public-action", produces = "application/json")
+	public ResponseEntity<Object> anonym() {
+
+		User user = new User(null, "Anonym", "1");
+
+		return new ResponseEntity<Object>(user, HttpStatus.OK);
+	}
+
 	@CrossOrigin(origins = "http://localhost:8080")
 	@RequestMapping("/add-default")
 	@ResponseBody
 	public String anyMap() {
-		
+
 		User simpleUser = new User();
-		
+
 		simpleUser.setName("test");
-		
+
 		simpleUser.setPassword("test1");
-		
+
 		userService.saveUser(simpleUser);
-		
+
 		String passwrd1 = bCryptPasswordEncoder1.encode("casa1");
-		
+
 		String passwrd2 = bCryptPasswordEncoder1.encode("casa1");
-		
-		System.out.println("passK "+passwrd1);
-		
-		System.out.println("passK "+passwrd2);
-		
-		System.out.println("matches?" +bCryptPasswordEncoder1.matches("casa", passwrd1));
-		
+
+		System.out.println("passK " + passwrd1);
+
+		System.out.println("passK " + passwrd2);
+
+		System.out.println("matches?" + bCryptPasswordEncoder1.matches("casa", passwrd1));
+
 		return "Created User";
-		
-		
+
 	}
-	
+
 	@CrossOrigin(origins = "http://localhost:8080")
 	@PostMapping("/register")
 	@ResponseBody
-	public ResponseEntity<?> register(@RequestBody(required=false) UserBuilder userBuilder) {
-		
-		if(userBuilder == null) {
-			
+	public ResponseEntity<?> register(@RequestBody(required = false) UserBuilder userBuilder) {
+
+		if (userBuilder == null) {
+
 			return new ResponseEntity<ErrorMessages>(ErrorMessages.PARAMETERS_REQUIRED, HttpStatus.BAD_REQUEST);
-		
+
 		}
-		
-		if(!userBuilder.hasUsernameAndPassword()) {
-			
+
+		if (!userBuilder.hasUsernameAndPassword()) {
+
 			return new ResponseEntity<ErrorMessages>(ErrorMessages.WRONG_PARAMETERS, HttpStatus.BAD_REQUEST);
-				
+
 		}
-		
+
 		try {
 			customValidatorService.isValidSizeUserPassword(userBuilder.getUsername(), userBuilder.getPassword());
 		} catch (CustomUserPasswordSizeException e) {
-			
-			return new ResponseEntity<ErrorMessages>(ErrorMessages.SIZE_USERNAME_PASSWORD,HttpStatus.BAD_REQUEST);
-			
-		} 
-		
+
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.SIZE_USERNAME_PASSWORD, HttpStatus.BAD_REQUEST);
+
+		}
+
 		User user = userBuilder.buildUser();
-		
+
 		System.out.println(user);
-		
+
 		boolean userNameAlreadyExists = userService.existsUser(user.getName());
-		
-		if(userNameAlreadyExists) {
+
+		if (userNameAlreadyExists) {
+
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.USER_ALREADY_EXISTS, HttpStatus.BAD_REQUEST);
+
+		}
+
+		userService.saveUser(user);
+
+		return new ResponseEntity<Object>(null, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "/all-books", produces = "application/json")
+	public ResponseEntity<List<Book>> getAllBooks() {
+
+		List<Book> books = BookService.findAllBooks();
+
+		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "/all-categories", produces = "application/json")
+	public ResponseEntity<List<Category>> getAllCategories() {
+
+		List<Category> categories = categoryService.getAllCategories();
+
+		return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/all-subcategories", produces = "application/json")
+	public ResponseEntity<List<Subcategory>> getAllSubCategories() {
+
+		List<Subcategory> subcategories = subcategoryService.getAllSubcategories();
+
+		return new ResponseEntity<List<Subcategory>>(subcategories, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/authors-by-substring-name", produces = "application/json")
+	public ResponseEntity<?> getAllAuthorsBySubstringName(@RequestBody(required = false) Author author) {
+
+		List<Author> authors = null;
+
+		if (author == null || author.getName() == null || author.getName().equals("")) {
+
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.SIZE_AUTHOR, HttpStatus.BAD_REQUEST);
+
+		} else {
 			
-			return new ResponseEntity<ErrorMessages>
-			(ErrorMessages.USER_ALREADY_EXISTS,HttpStatus.BAD_REQUEST);	
-			
+			authors = authorService.findAllBySubstringName(author.getName());
+
+			return new ResponseEntity<List<Author>>(authors, HttpStatus.OK);
+
 		}
 		
-		userService.saveUser(user);
-		
-		return new ResponseEntity<Object>(null,HttpStatus.OK);
-		
 	}
-	
-	@GetMapping(value = "/all-books", produces="application/json")
-	public ResponseEntity<List<Book>> getAllBooks(){
 		
-		List<Book> books = BookService.findAllBooks();
+		@GetMapping(value = "/books-by-params", produces = "application/json") 
+		ResponseEntity<?> 
+			getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
+			
+				if(bookParamsFinder == null) bookParamsFinder = new BookParamsFinder();
+			
+				List<Book> books =  BookService.findBooksByParams(bookParamsFinder);
 				
-		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
-		
-	}
-	
-	@GetMapping(value = "/all-categories", produces="application/json")
-	public ResponseEntity<List<Category>> getAllCategories(){
-		
-		List<Category> categories = categoryService.getAllCategories();
-		
-		return new ResponseEntity<List<Category>>(categories,HttpStatus.OK);
-	}
-	
-	@GetMapping(value = "/all-subcategories", produces="application/json")
-	public ResponseEntity<List<Subcategory>> getAllSubCategories(){
-		
-		List<Subcategory> subcategories = subcategoryService.getAllSubcategories();
-				
-		return new ResponseEntity<List<Subcategory>>(subcategories,HttpStatus.OK);
-	}
-	
-	
+				return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+			
+			
+		}		
 
-}
+	}
+
+

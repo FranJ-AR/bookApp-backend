@@ -5,8 +5,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.entity.User;
 
+@Deprecated
 public interface CustomUserRepository {
 	
 	
-
 }

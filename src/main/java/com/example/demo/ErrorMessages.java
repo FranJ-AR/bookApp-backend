@@ -31,6 +31,9 @@ public class ErrorMessages {
 	public static final ErrorMessages PARAMETERS_REQUIRED = 
 			new ErrorMessages("Parameters required");
 	
+	public static final ErrorMessages SIZE_AUTHOR = 
+			new ErrorMessages("Please, insert at least one letter");
+	
 	
 	private ErrorMessages(String error) {
 		

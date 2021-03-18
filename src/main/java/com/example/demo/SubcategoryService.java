@@ -22,5 +22,12 @@ public class SubcategoryService {
 				
 		return subcategories;
 	}
+	
+	public boolean existsById(Integer id) {
+		
+		if(id == null) return false;
+		
+		return subcategoryRepository.existsById(id);
+	}
 
 }
