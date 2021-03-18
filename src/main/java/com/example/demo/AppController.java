@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.auth.AuthenticationRequest;
 import com.example.auth.AuthenticationResponse;
+import com.example.entity.Book;
+import com.example.entity.Category;
+import com.example.entity.Subcategory;
 import com.example.entity.User;
 import com.example.exceptions.CustomUserPasswordSizeException;
 
@@ -36,6 +41,15 @@ public class AppController {
 	
 	@Autowired
 	CustomValidatorService customValidatorService;
+	
+	@Autowired
+	BookService BookService;
+	
+	@Autowired
+	CategoryService categoryService;
+	
+	@Autowired
+	SubcategoryService subcategoryService;
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/private-action", produces="application/json")
@@ -131,6 +145,31 @@ public class AppController {
 		
 		return new ResponseEntity<Object>(null,HttpStatus.OK);
 		
+	}
+	
+	@GetMapping(value = "/all-books", produces="application/json")
+	public ResponseEntity<List<Book>> getAllBooks(){
+		
+		List<Book> books = BookService.findAllBooks();
+				
+		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(value = "/all-categories", produces="application/json")
+	public ResponseEntity<List<Category>> getAllCategories(){
+		
+		List<Category> categories = categoryService.getAllCategories();
+		
+		return new ResponseEntity<List<Category>>(categories,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/all-subcategories", produces="application/json")
+	public ResponseEntity<List<Subcategory>> getAllSubCategories(){
+		
+		List<Subcategory> subcategories = subcategoryService.getAllSubcategories();
+				
+		return new ResponseEntity<List<Subcategory>>(subcategories,HttpStatus.OK);
 	}
 	
 	

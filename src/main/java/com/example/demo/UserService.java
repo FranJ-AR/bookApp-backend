@@ -11,10 +11,10 @@ import com.example.entity.User;
 public class UserService {
 	
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public User loadUser(String userName) {
 		
