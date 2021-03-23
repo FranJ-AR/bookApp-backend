@@ -1,11 +1,14 @@
 package com.example.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -35,6 +38,12 @@ public class Book {
 	private Integer numberCopies;
 	
 	private String description;
+	
+	@OneToMany
+	private List<Loan> loans;
+	
+	@OneToMany
+	private List<Reservation> reservation;
 
 	public Book() {
 		super();
@@ -100,6 +109,34 @@ public class Book {
 		
 		return 3;
 	}
+	
+	public Integer getNumberCopies() {
+		return numberCopies;
+	}
+
+	public void setNumberCopies(Integer numberCopies) {
+		this.numberCopies = numberCopies;
+	}
+
+	public List<Loan> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<Loan> loans) {
+		this.loans = loans;
+	}
+
+	public List<Reservation> getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(List<Reservation> reservation) {
+		this.reservation = reservation;
+	}
+
+	
+	
+	
 	
 
 }
