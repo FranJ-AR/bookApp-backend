@@ -11,8 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties({"loans","reservations"})
 public class Book {
 	
 	@Id
@@ -37,13 +39,18 @@ public class Book {
 	
 	private Integer numberCopies;
 	
+	private Integer numberLoaned;
+	
+	private Integer numberReservated;
+	
 	private String description;
 	
-	@OneToMany
+	
+	@OneToMany(mappedBy="book")
 	private List<Loan> loans;
 	
-	@OneToMany
-	private List<Reservation> reservation;
+	@OneToMany(mappedBy="book")
+	private List<Reservation> reservations;
 
 	public Book() {
 		super();
@@ -118,6 +125,22 @@ public class Book {
 		this.numberCopies = numberCopies;
 	}
 
+	public Integer getNumberLoaned() {
+		return numberLoaned;
+	}
+
+	public void setNumberLoaned(Integer numberLoaned) {
+		this.numberLoaned = numberLoaned;
+	}
+
+	public Integer getNumberReservated() {
+		return numberReservated;
+	}
+
+	public void setNumberReservated(Integer numberReservated) {
+		this.numberReservated = numberReservated;
+	}
+
 	public List<Loan> getLoans() {
 		return loans;
 	}
@@ -127,11 +150,11 @@ public class Book {
 	}
 
 	public List<Reservation> getReservation() {
-		return reservation;
+		return reservations;
 	}
 
-	public void setReservation(List<Reservation> reservation) {
-		this.reservation = reservation;
+	public void setReservation(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 
 	

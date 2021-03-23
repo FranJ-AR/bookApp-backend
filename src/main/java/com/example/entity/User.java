@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"loans","reservations"})
 public class User {
 
 	@Id
@@ -19,10 +22,14 @@ public class User {
 	private String name;
 	private String password;
 	
-	@OneToMany
+	private Integer numberLoaned;
+	
+	private Integer numberReservated;
+	
+	@OneToMany(mappedBy="user")
 	private List<Loan> loans;
 	
-	@OneToMany
+	@OneToMany(mappedBy="user")
 	private List<Reservation> reservations;
 
 	public User() {
@@ -76,6 +83,22 @@ public class User {
 
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
+	}
+
+	public Integer getNumberLoaned() {
+		return numberLoaned;
+	}
+
+	public void setNumberLoaned(Integer numberLoaned) {
+		this.numberLoaned = numberLoaned;
+	}
+
+	public Integer getNumberReservated() {
+		return numberReservated;
+	}
+
+	public void setNumberReservated(Integer numberReservated) {
+		this.numberReservated = numberReservated;
 	}
 
 	@Override

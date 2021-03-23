@@ -15,10 +15,8 @@ public class BaseLoanReservationKey implements Serializable{
 	 */
 	private static final long serialVersionUID = 7402573353141650645L;
 
-	@Column(name = "user_id")
 	private Integer userId;
 	
-	@Column(name = "book_id")
 	private Integer bookId;
 
 	public Integer getUserId() {
