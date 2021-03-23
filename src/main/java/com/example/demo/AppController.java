@@ -196,6 +196,14 @@ public class AppController {
 			getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
 			
 				if(bookParamsFinder == null) bookParamsFinder = new BookParamsFinder();
+				
+				bookParamsFinder.setTitleSubstring(null);
+				
+				//bookParamsFinder.setAuthorId(4);
+				
+				bookParamsFinder.setCategoryId(300);
+				
+				bookParamsFinder.setSubcategoryId(null);
 			
 				List<Book> books =  BookService.findBooksByParams(bookParamsFinder);
 				

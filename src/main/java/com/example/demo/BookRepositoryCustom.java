@@ -6,6 +6,6 @@ import com.example.entity.Book;
 
 public interface BookRepositoryCustom {
 	
-	public List<Book>findBooksByParams(BookParamsFinder bookParamsFinder);
+	public List<Book>findBooksByParams1(BookParamsFinder bookParamsFinder);
 
 }

@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class BookService {
 	
 	public List<Book> findBooksByParams(BookParamsFinder bookParamsFinder){
 		
+		String titleSubstring = bookParamsFinder.getTitleSubstring();
+		
 		Integer authorId = bookParamsFinder.getAuthorId();
 		
 		Integer categoryId = bookParamsFinder.getCategoryId();
@@ -42,13 +45,22 @@ public class BookService {
 		
 		// If an id does not exist on the DB, make it null
 		
-		if( !authorService.existsById(authorId)) bookParamsFinder.setAuthorId(null);
+		//if( titleSubstring == null) titleSubstring = "";
 		
-		if( !categoryService.existsById(categoryId)) bookParamsFinder.setCategoryId(null);
+		if( !authorService.existsById(authorId)) authorId = null;
 		
-		if( !subcategoryService.existsById(subcategoryId)) bookParamsFinder.setSubcategoryId(null);
+		if( !categoryService.existsById(categoryId)) categoryId = null;
 		
-		return bookRepository.findBooksByParams(bookParamsFinder);
+		if( !subcategoryService.existsById(subcategoryId)) subcategoryId = null;
+		
+		Iterable<Book> iterableBook = bookRepository.findBooksByParams( titleSubstring,
+				authorId, categoryId, subcategoryId);
+		
+		List<Book> books = new ArrayList<Book>();
+				
+		iterableBook.forEach(books::add);
+		
+		return books;
 		
 		
 		
