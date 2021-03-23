@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.repositories;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.BookParamsFinder;
 import com.example.entity.Book;
 
 public class BookRepositoryCustomImpl implements BookRepositoryCustom{

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Book;
 import com.example.entity.Category;
+import com.example.repositories.CategoryRepository;
 
 @Service
 public class CategoryService {

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.services;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.BookParamsFinder;
 import com.example.entity.Book;
+import com.example.repositories.BookRepository;
 
 @Service
 public class BookService {
