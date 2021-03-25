@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @JsonIgnoreProperties({"loans","reservations"})
@@ -149,15 +150,19 @@ public class Book {
 		this.loans = loans;
 	}
 
-	public List<Reservation> getReservation() {
+	public List<Reservation> getReservations() {
 		return reservations;
 	}
 
-	public void setReservation(List<Reservation> reservations) {
+	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 
-	
+	@JsonProperty("canBeLoaned")
+	public boolean canBeLoaned() {
+		
+		return  getNumberLoaned() < getNumberCopies();
+	}
 	
 	
 	

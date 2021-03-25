@@ -1,13 +1,9 @@
 package com.example.demo;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,16 +15,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.example.auth.AuthenticationRequest;
-import com.example.auth.AuthenticationResponse;
 import com.example.entity.Author;
 import com.example.entity.Book;
 import com.example.entity.Category;
 import com.example.entity.Subcategory;
 import com.example.entity.User;
 import com.example.exceptions.CustomUserPasswordSizeException;
+import com.example.services.AuthorService;
+import com.example.services.BookService;
+import com.example.services.CategoryService;
+import com.example.services.CustomValidatorService;
+import com.example.services.SubcategoryService;
+import com.example.services.UserService;
 
 @Controller
 //@RequestMapping("/")
@@ -195,15 +194,9 @@ public class AppController {
 		ResponseEntity<?> 
 			getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
 			
+				// if no params given
+			
 				if(bookParamsFinder == null) bookParamsFinder = new BookParamsFinder();
-				
-				bookParamsFinder.setTitleSubstring(null);
-				
-				//bookParamsFinder.setAuthorId(4);
-				
-				bookParamsFinder.setCategoryId(300);
-				
-				bookParamsFinder.setSubcategoryId(null);
 			
 				List<Book> books =  BookService.findBooksByParams(bookParamsFinder);
 				

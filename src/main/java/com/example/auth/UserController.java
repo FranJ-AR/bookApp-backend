@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.CustomValidatorService;
 import com.example.demo.ErrorMessages;
 import com.example.exceptions.CustomUserPasswordSizeException;
+import com.example.services.CustomValidatorService;
 
 import lombok.RequiredArgsConstructor;
 
