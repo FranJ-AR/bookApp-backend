@@ -7,15 +7,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.example.demo.UserService;
 import com.example.entity.User;
 import com.example.repositories.UserRepository;
+import com.example.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@ComponentScan("com.example.demo")
+@ComponentScan("com.example.services")
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
