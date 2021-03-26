@@ -3,7 +3,9 @@ package com.example.services;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
+import org.hibernate.internal.util.beans.BeanInfoHelper.ReturningBeanInfoDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +47,7 @@ public class BookService {
 		
 		Integer subcategoryId = bookParamsFinder.getSubcategoryId();
 		
-		// If an id does not exist on the DB, make it null
+		// If an element does not exist on the DB, make it null
 		
 		//if( titleSubstring == null) titleSubstring = "";
 		
@@ -65,7 +67,16 @@ public class BookService {
 		return books;
 		
 		
+	}
+	
+	public Book findById(int bookId) {
+		
+		Optional<Book> optionalBook = bookRepository.findById(bookId);
+		
+		if(optionalBook.isEmpty()) return null;
+		
+		return optionalBook.get();
 		
 	}
-
+	
 }

@@ -2,6 +2,7 @@ package com.example.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,47 +11,51 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonIgnoreProperties({"loans","reservations"})
+@JsonIgnoreProperties({ "loans", "reservations" })
 public class Book {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String name;
-	
-	//@JsonBackReference
+
+	// @JsonBackReference
 	@ManyToOne
 	private Category category;
-	
-	//@JsonBackReference
+
+	// @JsonBackReference
 	@ManyToOne
 	private Subcategory subcategory;
-	
-	//@JsonBackReference
+
+	// @JsonBackReference
 	@ManyToOne
 	private Author author;
-	
+
 	private String imageUrl;
-	
+
 	private Integer numberCopies;
-	
-	private Integer numberLoaned;
-	
+
+//	private Integer numberLoaned;
+//
 	private Integer numberReservated;
-	
+
 	private String description;
-	
-	
-	@OneToMany(mappedBy="book")
+
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Loan> loans;
-	
-	@OneToMany(mappedBy="book")
+
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Reservation> reservations;
 
 	public Book() {
@@ -112,26 +117,18 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public Integer constant() {
-		
+
 		return 3;
 	}
-	
+
 	public Integer getNumberCopies() {
 		return numberCopies;
 	}
 
-	public void setNumberCopies(Integer numberCopies) {
-		this.numberCopies = numberCopies;
-	}
-
 	public Integer getNumberLoaned() {
-		return numberLoaned;
-	}
-
-	public void setNumberLoaned(Integer numberLoaned) {
-		this.numberLoaned = numberLoaned;
+		return loans.size();
 	}
 
 	public Integer getNumberReservated() {
@@ -160,11 +157,20 @@ public class Book {
 
 	@JsonProperty("canBeLoaned")
 	public boolean canBeLoaned() {
-		
-		return  getNumberLoaned() < getNumberCopies();
+
+		return getNumberLoaned() < getNumberCopies();
 	}
+
 	
+	public void add1Reservation() {
+
+		setNumberReservated(getNumberReservated() + 1);
+	}
+
 	
-	
+	public void remove1Reservation() {
+
+		setNumberReservated(getNumberReservated() - 1);
+	}
 
 }

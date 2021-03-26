@@ -1,13 +1,13 @@
 package com.example.demo;
 
 public class BookParamsFinder {
-	
+
 	private String titleSubstring;
-	
+
 	private Integer authorId;
-	
+
 	private Integer categoryId;
-	
+
 	private Integer subcategoryId;
 
 	public BookParamsFinder() {
@@ -45,7 +45,5 @@ public class BookParamsFinder {
 	public void setSubcategoryId(Integer subcategoryId) {
 		this.subcategoryId = subcategoryId;
 	}
-	
-	
 
 }

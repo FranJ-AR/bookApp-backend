@@ -2,6 +2,7 @@ package com.example.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonIgnoreProperties({"loans","reservations"})
+@JsonIgnoreProperties({"password","loans","reservations"})
 public class User {
+	
+	public static final Integer MAX_LOANS = 6;
+	public static final Integer MAX_RESERVATIONS = 6;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +27,14 @@ public class User {
 	private String name;
 	private String password;
 	
-	private Integer numberLoaned;
+	private Integer numberLoaned = 0;
 	
-	private Integer numberReservated;
+	private Integer numberReservated = 0;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Loan> loans;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
 
 	public User() {
@@ -99,6 +104,39 @@ public class User {
 
 	public void setNumberReservated(Integer numberReservated) {
 		this.numberReservated = numberReservated;
+	}
+	
+	@JsonProperty("canLoan")
+	public boolean canLoan() {
+		
+		return getNumberLoaned() < MAX_LOANS;
+		
+	}
+	
+	@JsonProperty("canReservate")
+	public boolean canReservate() {
+		
+		return getNumberReservated() < MAX_RESERVATIONS;
+	}
+	
+	public void add1Loan() {
+		
+		setNumberLoaned(getNumberLoaned() + 1);
+	}
+	
+	public void add1Reservation() {
+		
+		setNumberReservated(getNumberReservated() + 1);
+	}
+	
+	public void remove1Loan() {
+		
+		setNumberLoaned(getNumberLoaned() - 1);
+	}
+	
+	public void remove1Reservation() {
+		
+		setNumberReservated(getNumberReservated() - 1);
 	}
 
 	@Override

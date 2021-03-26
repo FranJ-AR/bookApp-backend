@@ -2,25 +2,28 @@ package com.example.entity;
 
 import java.time.ZonedDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.MapsId;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @MappedSuperclass
-public abstract class BaseLoanReservation {
+public abstract class BaseLoanAndReservation {
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@MapsId("userId")
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@MapsId("bookId")
 	@JoinColumn(name="book_id")
 	private Book book;
@@ -28,6 +31,17 @@ public abstract class BaseLoanReservation {
 	@Column(name="generated_on")
 	private ZonedDateTime timestamp;
 	
+	public BaseLoanAndReservation() {
+		super();
+	}
+
+	public BaseLoanAndReservation(User user, Book book, ZonedDateTime timestamp) {
+		super();
+		this.user = user;
+		this.book = book;
+		this.timestamp = timestamp;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -51,6 +65,8 @@ public abstract class BaseLoanReservation {
 	public void setTimestamp(ZonedDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	
 
 	
 

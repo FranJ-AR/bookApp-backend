@@ -1,9 +1,12 @@
 package com.example.repositories;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import com.example.entity.Loan;
+import com.example.entity.Reservation;
+import com.example.entity.ReservationKey;
 
-public interface ReservationRepository extends CrudRepository<Loan, Integer>{
+@Repository
+public interface ReservationRepository extends CrudRepository<Reservation, ReservationKey>{
 
 }
