@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.time.ZonedDateTime;
+
 public class ErrorMessages {
 	
 	private String error;
@@ -34,6 +36,36 @@ public class ErrorMessages {
 	public static final ErrorMessages SIZE_AUTHOR = 
 			new ErrorMessages("Please, insert at least one letter");
 	
+	public static final ErrorMessages BOOK_ID_NOT_EXISTS = 
+			new ErrorMessages("The id of the book does not exist");
+	
+	public static final ErrorMessages NO_COPIES_FOR_LOAN = 
+			new ErrorMessages("No copies for loan left");
+	
+	public static final ErrorMessages USER_LIMIT_LOAN_REACHED = 
+			new ErrorMessages("User limit loan reached");
+	
+	public static final ErrorMessages LOAN_ALREADY_EXISTS = 
+			new ErrorMessages("Loan already exists");
+	
+	public static final ErrorMessages UNKNOWN_ERROR_LOAN = 
+			new ErrorMessages("Unknown error loan");
+	
+	public static final ErrorMessages RESERVATION_NOT_EXISTS = 
+			new ErrorMessages("The reservation does not exist");
+	
+	public static final ErrorMessages UNKNOWN_ERROR_RESERVATION = 
+			new ErrorMessages("The reservation does not exist");
+	
+	public static final ErrorMessages RESERVATION_ALREADY_EXISTS = 
+			new ErrorMessages("Reservation already exists");
+	
+	public static final ErrorMessages RESERVATION_LIMIT_REACHED = 
+			new ErrorMessages("User limit reservation reached");
+	
+	public static final ErrorMessages RESERVATION_UNAVAILABLE_LOAN_AVAILABLE = 
+			new ErrorMessages("Cannot reservate, loan is available");
+
 	
 	private ErrorMessages(String error) {
 		
@@ -47,6 +79,13 @@ public class ErrorMessages {
 
 	public void setErrorMessage(String error) {
 		this.error = error;
+	}
+	
+	public ZonedDateTime getDateTime() {
+		
+		return ZonedDateTime.now();
+		
+		
 	}
 	
 	
