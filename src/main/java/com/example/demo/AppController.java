@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.util.List;
 
+import org.apache.coyote.http11.Http11OutputBuffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.entity.Author;
 import com.example.entity.Book;
 import com.example.entity.Category;
+import com.example.entity.Loan;
+import com.example.entity.Reservation;
 import com.example.entity.Subcategory;
 import com.example.entity.User;
+import com.example.exceptions.CustomCannotReservateLoanAvailableException;
 import com.example.exceptions.CustomLoanAlreadyExistsException;
 import com.example.exceptions.CustomMaximumUserBooksLoanedException;
 import com.example.exceptions.CustomNoCopiesForLoanAvailableException;
@@ -221,54 +225,146 @@ public class AppController {
 
 	}
 	
+	@GetMapping(value = "book/{id}")
+	public ResponseEntity<?> findBook(@PathVariable("id") int id){
+		
+		Book book = bookService.findById(id);
+		
+		if(book == null) return getBookIdDoesNotExistsResponse();
+		
+		return new ResponseEntity<Book>(book,HttpStatus.OK);
+	}
+	
 	//Needs authentification
 	@PostMapping(value = "/add-loan/{id}")
 	public ResponseEntity<?> addLoan(@PathVariable("id") Integer bookId) 
 			throws CustomNoCopiesForLoanAvailableException, CustomMaximumUserBooksLoanedException, 
 			CustomLoanAlreadyExistsException{
 		
+		try {
+		
 		User user = getUserAuthentified();
-		
-		
 		
 		Book book = bookService.findById(bookId);
 		
+		if(book == null) return getBookIdDoesNotExistsResponse();
+		
 		loanService.createNewLoan(book, user);
 		
+		}catch(CustomNoCopiesForLoanAvailableException e1 ) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.NO_COPIES_FOR_LOAN,HttpStatus.BAD_REQUEST);
+			
+		}catch(CustomMaximumUserBooksLoanedException e2) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.BOOK_ID_NOT_EXISTS,HttpStatus.BAD_REQUEST);
+			
+		}catch(CustomLoanAlreadyExistsException e3) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.LOAN_ALREADY_EXISTS,HttpStatus.BAD_REQUEST);
+			
+		}catch(Exception e4) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.UNKNOWN_ERROR_LOAN,HttpStatus.BAD_REQUEST);
+		}
 	
 		
-		return null;
+		return new ResponseEntity<>(null, HttpStatus.OK);
 		
 	}
 	
 	//Needs authentification
 	@PostMapping(value = "/add-reservation/{id}")
-	public ResponseEntity<?> addReservation(@PathVariable("id") int bookId) throws
-	CustomReservationAlreadyExistsException, CustomUserReservationLimitReachedException{
+	public ResponseEntity<?> addReservation(@PathVariable("id") int bookId){
+		
+		try {
 		
 		User user = getUserAuthentified();
 		
 		Book book = bookService.findById(bookId);
 		
+		if(book == null) return getBookIdDoesNotExistsResponse();
+		
 		reservationService.createNewReservation(book, user);
 		
-		return null;
+		}catch(CustomReservationAlreadyExistsException e1) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.RESERVATION_ALREADY_EXISTS,HttpStatus.BAD_REQUEST);
+		
+		}catch(CustomUserReservationLimitReachedException e2) {
+		
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.RESERVATION_LIMIT_REACHED,HttpStatus.BAD_REQUEST);
+		
+		}catch (CustomCannotReservateLoanAvailableException e3) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.RESERVATION_UNAVAILABLE_LOAN_AVAILABLE,HttpStatus.BAD_REQUEST);
+			
+		}catch (Exception e4) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.UNKNOWN_ERROR_RESERVATION,HttpStatus.BAD_REQUEST);	
+		}
+		
+		return new ResponseEntity<>(null, HttpStatus.OK);
 		
 	}
 	
+	//Needs authentification
 	@PostMapping(value = "/remove-reservation/{id}")
-	public ResponseEntity<?> removeReservation(@PathVariable("id") int bookId) throws 
-	CustomReservationNotExistsException
+	public ResponseEntity<?> removeReservation(@PathVariable("id") int bookId)
 	{
 		
 		User user = getUserAuthentified();
 		
 		Book book = bookService.findById(bookId);
 		
-		reservationService.deleteReservation(book, user);
+		if(book == null) return getBookIdDoesNotExistsResponse();
 		
-		return null;
+		try {
+			
+			reservationService.deleteReservation(book, user);
+			
+		}catch(CustomReservationNotExistsException e1) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.RESERVATION_NOT_EXISTS,HttpStatus.BAD_REQUEST);
+			
+		}catch(Exception e2) {
+			
+			return new ResponseEntity<ErrorMessages>(ErrorMessages.UNKNOWN_ERROR_RESERVATION,HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.OK);
 		
+	}
+	
+	//Needs authentification
+	@GetMapping(value = "loans")
+	public ResponseEntity<?> findLoansByUser(){
+		
+		User user = getUserAuthentified();
+		
+		List<Loan> loans = loanService.findLoansByUserId(user.getId());
+		
+		return new ResponseEntity<List<Loan>>(loans,HttpStatus.OK);
+	}
+	
+	//Needs authentification
+	@GetMapping(value = "reservations")
+	public ResponseEntity<?> findReservationsByUser(){
+		
+		User user = getUserAuthentified();
+		
+		List<Reservation> reservations = reservationService.findReservationsByUserId(user.getId());
+		
+		return new ResponseEntity<List<Reservation>>(reservations,HttpStatus.OK);
+	}
+	
+	//Needs authentification
+	@GetMapping(value = "user-details")
+	public ResponseEntity<?> getUser(){
+		
+		User user = getUserAuthentified();
+		
+		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
 	//Needs authentification
@@ -281,6 +377,12 @@ public class AppController {
 		User user = userService.loadUser(currentPrincipalName);
 				
 		return user;
+		
+	}
+	
+	private ResponseEntity<?> getBookIdDoesNotExistsResponse(){
+		
+		return new ResponseEntity<ErrorMessages>(ErrorMessages.BOOK_ID_NOT_EXISTS,HttpStatus.BAD_REQUEST);
 		
 	}
 	

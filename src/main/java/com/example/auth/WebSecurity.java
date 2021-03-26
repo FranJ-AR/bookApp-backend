@@ -62,10 +62,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
          .and()
          .authorizeRequests().antMatchers("/books-by-params").permitAll()
          .and()
+         .authorizeRequests().antMatchers("/book/{\\d+}").permitAll()
+         .and()
          //.authorizeRequests().antMatchers("/endpoint").authenticated()
          //.and()
          .authorizeRequests().antMatchers("/prot","/private-action",
-        		 "/add-loan/{\\d+}","/add-reservation/{\\d+}","/remove-reservation/{\\d+}").authenticated()
+        		 "/add-loan/{\\d+}","/add-reservation/{\\d+}",
+        		 "/remove-reservation/{\\d+}","loans","reservations","user-details").authenticated()
          .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
  
