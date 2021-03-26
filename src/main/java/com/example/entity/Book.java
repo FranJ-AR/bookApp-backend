@@ -45,8 +45,6 @@ public class Book {
 	private Integer numberCopies;
 
 //	private Integer numberLoaned;
-//
-	private Integer numberReservated;
 
 	private String description;
 
@@ -127,11 +125,7 @@ public class Book {
 	}
 
 	public Integer getNumberReservated() {
-		return numberReservated;
-	}
-
-	public void setNumberReservated(Integer numberReservated) {
-		this.numberReservated = numberReservated;
+		return reservations.size();
 	}
 
 	public List<Loan> getLoans() {
@@ -154,18 +148,6 @@ public class Book {
 	public boolean canBeLoaned() {
 
 		return getNumberLoaned() < getNumberCopies();
-	}
-
-	
-	public void add1Reservation() {
-
-		setNumberReservated(getNumberReservated() + 1);
-	}
-
-	
-	public void remove1Reservation() {
-
-		setNumberReservated(getNumberReservated() - 1);
 	}
 
 }

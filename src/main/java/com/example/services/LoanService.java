@@ -1,6 +1,8 @@
 package com.example.services;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,15 @@ public class LoanService {
 				
 	}
 	
+	public List<Loan> findLoansByUserId(Integer userId){
+		
+		List<Loan> loans = new ArrayList<Loan>();
+		
+		loanRepository.findLoansByUserId(userId).forEach(loans::add);
+		
+		return loans;
+	}
+	
 	private Loan findLoan(Book book, User user) {
 		
 		LoanKey loanKey = new LoanKey(user.getId(), book.getId());
@@ -55,6 +66,7 @@ public class LoanService {
 		
 		return optionalLoan.get();
 	}
+	
 	
 
 }

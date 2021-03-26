@@ -37,18 +37,6 @@ public class Reservation extends BaseLoanAndReservation {
 		return result;
 	}
 
-	public void add1Reservation() {
-
-		getBook().add1Reservation();
-		getUser().add1Reservation();
-	}
-	
-	public void remove1Reservation() {
-		
-		getBook().remove1Reservation();
-		getUser().remove1Reservation();
-	}
-
 	// A reservation is equal to another one if the id of the books and the users
 	// are the same
 	@Override

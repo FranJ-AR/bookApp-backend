@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonIgnoreProperties({"password","loans","reservations"})
+@JsonIgnoreProperties({"id","password","loans","reservations"})
 public class User {
 	
 	public static final Integer MAX_LOANS = 6;
@@ -31,13 +31,12 @@ public class User {
 	private String name;
 	private String password;
 	
-	private Integer numberReservated = 0;
-	
-	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Loan> loans;
 	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Reservation> reservations;
 
 	public User() {
@@ -98,12 +97,9 @@ public class User {
 		return getLoans().size();
 	}
 
+	@JsonProperty("numberReservated")
 	public Integer getNumberReservated() {
-		return numberReservated;
-	}
-
-	public void setNumberReservated(Integer numberReservated) {
-		this.numberReservated = numberReservated;
+		return getReservations().size();
 	}
 	
 	@JsonProperty("canLoan")
@@ -117,16 +113,6 @@ public class User {
 	public boolean canReservate() {
 		
 		return getNumberReservated() < MAX_RESERVATIONS;
-	}
-	
-	public void add1Reservation() {
-		
-		setNumberReservated(getNumberReservated() + 1);
-	}
-	
-	public void remove1Reservation() {
-		
-		setNumberReservated(getNumberReservated() - 1);
 	}
 
 	@Override
