@@ -64,8 +64,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
          .and()
          //.authorizeRequests().antMatchers("/endpoint").authenticated()
          //.and()
-         .authorizeRequests().antMatchers("/prot").permitAll()
-         .anyRequest().authenticated()
+         .authorizeRequests().antMatchers("/prot","/private-action","/add-loan/{\\d+}").authenticated()
          .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
  

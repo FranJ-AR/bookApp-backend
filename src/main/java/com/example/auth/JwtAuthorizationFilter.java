@@ -54,7 +54,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             
             if( jwtService != null && jwtService.hasTokenExpired(token)) {
             	
-            	System.out.println("Token expired");
+            	System.out.println("JwtAuthorization warn: Token expired or not valid");
             	filterChain.doFilter(request, response);
             	return;
             	

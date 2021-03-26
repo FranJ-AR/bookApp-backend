@@ -15,8 +15,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class JwtService {
-    //public static final int EXPIRATION_TIME_TOKEN = 1000 * 60 * 60; // in ms
-	public static final int EXPIRATION_TIME_TOKEN = 1000 * 60; // in ms
+    public static final int EXPIRATION_TIME_TOKEN = 1000 * 60 * 60; // in ms
+	//public static final int EXPIRATION_TIME_TOKEN = 1000 * 60; // in ms
     private static final String AUTHORITIES = "authorities";
     private final String SECRET_KEY;
  
@@ -49,7 +49,7 @@ public class JwtService {
    
         }catch(ExpiredJwtException e) {
         	
-        	System.out.println("Token expired");
+        	System.out.println("JwtService warn: Token expired");
         	return true;
         	
         }catch(Exception e) {
