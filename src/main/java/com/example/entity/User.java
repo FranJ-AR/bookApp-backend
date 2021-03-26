@@ -5,10 +5,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,11 +31,10 @@ public class User {
 	private String name;
 	private String password;
 	
-	private Integer numberLoaned = 0;
-	
 	private Integer numberReservated = 0;
 	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Loan> loans;
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
@@ -90,12 +93,9 @@ public class User {
 		this.reservations = reservations;
 	}
 
+	@JsonProperty("numberLoaned")
 	public Integer getNumberLoaned() {
-		return numberLoaned;
-	}
-
-	public void setNumberLoaned(Integer numberLoaned) {
-		this.numberLoaned = numberLoaned;
+		return getLoans().size();
 	}
 
 	public Integer getNumberReservated() {
@@ -119,19 +119,9 @@ public class User {
 		return getNumberReservated() < MAX_RESERVATIONS;
 	}
 	
-	public void add1Loan() {
-		
-		setNumberLoaned(getNumberLoaned() + 1);
-	}
-	
 	public void add1Reservation() {
 		
 		setNumberReservated(getNumberReservated() + 1);
-	}
-	
-	public void remove1Loan() {
-		
-		setNumberLoaned(getNumberLoaned() - 1);
 	}
 	
 	public void remove1Reservation() {

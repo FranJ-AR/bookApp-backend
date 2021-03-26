@@ -118,11 +118,6 @@ public class Book {
 		this.description = description;
 	}
 
-	public Integer constant() {
-
-		return 3;
-	}
-
 	public Integer getNumberCopies() {
 		return numberCopies;
 	}

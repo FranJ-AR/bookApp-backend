@@ -41,8 +41,6 @@ public class LoanService {
 			
 		Loan loan = new Loan(user, book, ZonedDateTime.now(), loanKey, false, Loan.calculateDateReturn());
 		
-		loan.add1Loan();
-		
 		loanRepository.save(loan);
 				
 	}

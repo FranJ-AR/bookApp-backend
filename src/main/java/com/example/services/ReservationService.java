@@ -13,7 +13,7 @@ import com.example.entity.ReservationKey;
 import com.example.entity.User;
 import com.example.exceptions.CustomReservationAlreadyExistsException;
 import com.example.exceptions.CustomReservationNotExistsException;
-import com.example.exceptions.CustomUserLoanLimitReachedException;
+import com.example.exceptions.CustomUserReservationLimitReachedException;
 import com.example.repositories.ReservationRepository;
 
 @Service
@@ -23,11 +23,11 @@ public class ReservationService {
 	private ReservationRepository reservationRepository;
 
 	@Transactional
-	public void createNewReservation(Book book, User user) throws CustomUserLoanLimitReachedException, 
-	CustomReservationAlreadyExistsException {
+	public void createNewReservation(Book book, User user) throws
+	CustomReservationAlreadyExistsException, CustomUserReservationLimitReachedException {
 
 		if (!user.canReservate())
-			throw new CustomUserLoanLimitReachedException();
+			throw new CustomUserReservationLimitReachedException();
 		
 		if( findReservation(book, user) != null) 
 			throw new CustomReservationAlreadyExistsException();

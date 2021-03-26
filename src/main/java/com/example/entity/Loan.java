@@ -13,7 +13,7 @@ public class Loan extends BaseLoanAndReservation{
 	@EmbeddedId
 	private LoanKey loanKey;
 	
-	private boolean beenPickedUp;
+	private Boolean beenPickedUp;
 	
 	private ZonedDateTime maximumReturnDate;
 
@@ -52,12 +52,6 @@ public class Loan extends BaseLoanAndReservation{
 
 	public void setMaximumReturnDate(ZonedDateTime maximumReturnDate) {
 		this.maximumReturnDate = maximumReturnDate;
-	}
-	
-	public void add1Loan() {
-		
-		
-		getUser().add1Loan();
 	}
 	
 	public static ZonedDateTime calculateDateReturn() {
