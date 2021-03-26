@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,20 @@ import com.example.entity.Book;
 import com.example.entity.Category;
 import com.example.entity.Subcategory;
 import com.example.entity.User;
+import com.example.exceptions.CustomLoanAlreadyExistsException;
+import com.example.exceptions.CustomMaximumUserBooksLoanedException;
+import com.example.exceptions.CustomNoCopiesForLoanAvailableException;
+import com.example.exceptions.CustomReservationAlreadyExistsException;
+import com.example.exceptions.CustomUserLoanLimitReachedException;
 import com.example.exceptions.CustomUserPasswordSizeException;
+import com.example.exceptions.CustomUserReservationLimitReachedException;
+import com.example.repositories.LoanRepository;
 import com.example.services.AuthorService;
 import com.example.services.BookService;
 import com.example.services.CategoryService;
 import com.example.services.CustomValidatorService;
+import com.example.services.LoanService;
+import com.example.services.ReservationService;
 import com.example.services.SubcategoryService;
 import com.example.services.UserService;
 
@@ -43,7 +53,7 @@ public class AppController {
 	private CustomValidatorService customValidatorService;
 
 	@Autowired
-	private BookService BookService;
+	private BookService bookService;
 
 	@Autowired
 	private CategoryService categoryService;
@@ -53,6 +63,12 @@ public class AppController {
 
 	@Autowired
 	private AuthorService authorService;
+	
+	@Autowired
+	private LoanService loanService;
+	
+	@Autowired
+	private ReservationService reservationService;
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/private-action", produces = "application/json")
@@ -149,7 +165,7 @@ public class AppController {
 	@GetMapping(value = "/all-books", produces = "application/json")
 	public ResponseEntity<List<Book>> getAllBooks() {
 
-		List<Book> books = BookService.findAllBooks();
+		List<Book> books = bookService.findAllBooks();
 
 		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
 
@@ -181,30 +197,77 @@ public class AppController {
 			return new ResponseEntity<ErrorMessages>(ErrorMessages.SIZE_AUTHOR, HttpStatus.BAD_REQUEST);
 
 		} else {
-			
+
 			authors = authorService.findAllBySubstringName(author.getName());
 
 			return new ResponseEntity<List<Author>>(authors, HttpStatus.OK);
 
 		}
+
+	}
+
+	@GetMapping(value = "/books-by-params", produces = "application/json")
+	public ResponseEntity<?> getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
+
+		// if no params given
+
+		if (bookParamsFinder == null)
+			bookParamsFinder = new BookParamsFinder();
+
+		List<Book> books = bookService.findBooksByParams(bookParamsFinder);
+
+		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+
+	}
+	
+	//Needs authentification
+	@PostMapping(value = "/add-loan/{id}")
+	public ResponseEntity<?> addLoan(@PathVariable("id") Integer bookId) 
+			throws CustomNoCopiesForLoanAvailableException, CustomMaximumUserBooksLoanedException, 
+			CustomLoanAlreadyExistsException{
+		
+		User user = getUserAuthentified();
+		
+		
+		
+		Book book = bookService.findById(bookId);
+		
+		loanService.createNewLoan(book, user);
+		
+	
+		
+		return null;
 		
 	}
+	
+	//Needs authentification
+	@PostMapping(value = "/add-reservation/{id}")
+	public ResponseEntity<?> addReservation(@PathVariable("id") int bookId) throws
+	CustomReservationAlreadyExistsException, CustomUserReservationLimitReachedException{
 		
-		@GetMapping(value = "/books-by-params", produces = "application/json") 
-		ResponseEntity<?> 
-			getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
-			
-				// if no params given
-			
-				if(bookParamsFinder == null) bookParamsFinder = new BookParamsFinder();
-			
-				List<Book> books =  BookService.findBooksByParams(bookParamsFinder);
+		User user = getUserAuthentified();
+		
+		Book book = bookService.findById(bookId);
+		
+		reservationService.createNewReservation(book, user);
+		
+		return null;
+		
+	}
+	
+	//Needs authentification
+	
+	private User getUserAuthentified() {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		
+		User user = userService.loadUser(currentPrincipalName);
 				
-				return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
-			
-			
-		}		
-
+		return user;
+		
 	}
+	
+	
 
-
+}
