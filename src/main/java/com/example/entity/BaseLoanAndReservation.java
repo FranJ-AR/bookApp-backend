@@ -18,12 +18,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @MappedSuperclass
 public abstract class BaseLoanAndReservation {
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@MapsId("userId")
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@MapsId("bookId")
 	@JoinColumn(name="book_id")
 	private Book book;
@@ -65,9 +65,8 @@ public abstract class BaseLoanAndReservation {
 	public void setTimestamp(ZonedDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
+		
 	
-	
-
 	
 
 }

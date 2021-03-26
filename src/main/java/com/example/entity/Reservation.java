@@ -67,5 +67,12 @@ public class Reservation extends BaseLoanAndReservation {
 			return false;
 		return true;
 	}
+	
+	public void removeReservation() {
+		
+		getBook().getReservations().remove(this);
+		
+		getUser().getReservations().remove(this);
+	}
 
 }

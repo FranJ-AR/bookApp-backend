@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.entity.BaseLoanAndReservationKey;
 import com.example.entity.Book;
 import com.example.entity.Reservation;
 import com.example.entity.ReservationKey;
@@ -49,14 +50,17 @@ public class ReservationService {
 		user.remove1Reservation();
 				
 		Reservation reservation = findReservation(book, user);
-		
+				
 		if(reservation == null) throw new CustomReservationNotExistsException();
 		
 		reservation.remove1Reservation();
+		
+		reservation.removeReservation();
 
-		reservationRepository.save(reservation);
-
+		reservation = reservationRepository.save(reservation);
+		
 		reservationRepository.delete(reservation);
+		
 	}
 	
 	private Reservation findReservation(Book book, User user) {
