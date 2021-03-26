@@ -26,6 +26,7 @@ import com.example.exceptions.CustomLoanAlreadyExistsException;
 import com.example.exceptions.CustomMaximumUserBooksLoanedException;
 import com.example.exceptions.CustomNoCopiesForLoanAvailableException;
 import com.example.exceptions.CustomReservationAlreadyExistsException;
+import com.example.exceptions.CustomReservationNotExistsException;
 import com.example.exceptions.CustomUserLoanLimitReachedException;
 import com.example.exceptions.CustomUserPasswordSizeException;
 import com.example.exceptions.CustomUserReservationLimitReachedException;
@@ -250,6 +251,21 @@ public class AppController {
 		Book book = bookService.findById(bookId);
 		
 		reservationService.createNewReservation(book, user);
+		
+		return null;
+		
+	}
+	
+	@PostMapping(value = "/remove-reservation/{id}")
+	public ResponseEntity<?> removeReservation(@PathVariable("id") int bookId) throws 
+	CustomReservationNotExistsException
+	{
+		
+		User user = getUserAuthentified();
+		
+		Book book = bookService.findById(bookId);
+		
+		reservationService.deleteReservation(book, user);
 		
 		return null;
 		
