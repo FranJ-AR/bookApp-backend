@@ -58,7 +58,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
          .and()
          .authorizeRequests().antMatchers("/all-subcategories").permitAll()
          .and()
-         .authorizeRequests().antMatchers("/authors-by-substring-name").permitAll()
+         .authorizeRequests().antMatchers("/authors-by-substring-name/author={\\s+}").permitAll()
          .and()
          .authorizeRequests().antMatchers("/books-by-params").permitAll()
          .and()

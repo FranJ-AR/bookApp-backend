@@ -124,7 +124,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:8080")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<?> register(@RequestBody(required = false) UserBuilder userBuilder) {
@@ -167,6 +167,7 @@ public class AppController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/all-books", produces = "application/json")
 	public ResponseEntity<List<Book>> getAllBooks() {
 
@@ -176,6 +177,7 @@ public class AppController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/all-categories", produces = "application/json")
 	public ResponseEntity<List<Category>> getAllCategories() {
 
@@ -184,6 +186,7 @@ public class AppController {
 		return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/all-subcategories", produces = "application/json")
 	public ResponseEntity<List<Subcategory>> getAllSubCategories() {
 
@@ -192,18 +195,19 @@ public class AppController {
 		return new ResponseEntity<List<Subcategory>>(subcategories, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/authors-by-substring-name", produces = "application/json")
-	public ResponseEntity<?> getAllAuthorsBySubstringName(@RequestBody(required = false) Author author) {
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(value = "/authors-by-substring-name/author={author}", produces = "application/json")
+	public ResponseEntity<?> getAllAuthorsBySubstringName(@PathVariable("author") String substringAuthor) {
 
 		List<Author> authors = null;
 
-		if (author == null || author.getName() == null || author.getName().equals("")) {
+		if (substringAuthor.equals("")) {
 
 			return new ResponseEntity<ErrorMessages>(ErrorMessages.SIZE_AUTHOR, HttpStatus.BAD_REQUEST);
 
 		} else {
 
-			authors = authorService.findAllBySubstringName(author.getName());
+			authors = authorService.findAllBySubstringName(substringAuthor);
 
 			return new ResponseEntity<List<Author>>(authors, HttpStatus.OK);
 
@@ -211,7 +215,8 @@ public class AppController {
 
 	}
 
-	@GetMapping(value = "/books-by-params", produces = "application/json")
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping(value = "/books-by-params", produces = "application/json")
 	public ResponseEntity<?> getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
 
 		// if no params given
