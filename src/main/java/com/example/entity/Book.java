@@ -149,5 +149,10 @@ public class Book {
 
 		return getNumberLoaned() < getNumberCopies();
 	}
+	
+	public Integer getCopiesLeft() {
+		
+		return getNumberCopies() - getNumberLoaned();
+	}
 
 }
