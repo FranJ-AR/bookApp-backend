@@ -5,7 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Embeddable
+@JsonIgnoreProperties({"bookId","userId"})
 public class LoanKey extends BaseLoanAndReservationKey implements Serializable{
 
 	/**
