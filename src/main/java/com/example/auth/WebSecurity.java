@@ -68,7 +68,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
          //.and()
          .authorizeRequests().antMatchers("/prot","/private-action",
         		 "/add-loan/{\\d+}","/add-reservation/{\\d+}",
-        		 "/remove-reservation/{\\d+}","loans","reservations","user-details").authenticated()
+        		 "/remove-reservation/{\\d+}","/loans","/reservations","/user-details").authenticated()
          .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
  
@@ -78,7 +78,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
  
-    @Bean
+   @Bean
    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
     	
