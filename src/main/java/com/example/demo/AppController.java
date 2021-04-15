@@ -241,6 +241,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/add-loan/{id}")
 	public ResponseEntity<?> addLoan(@PathVariable("id") Integer bookId) 
 			throws CustomNoCopiesForLoanAvailableException, CustomMaximumUserBooksLoanedException, 
@@ -279,6 +280,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/add-reservation/{id}")
 	public ResponseEntity<?> addReservation(@PathVariable("id") int bookId){
 		
@@ -314,6 +316,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/remove-reservation/{id}")
 	public ResponseEntity<?> removeReservation(@PathVariable("id") int bookId)
 	{
@@ -342,10 +345,16 @@ public class AppController {
 	}
 	
 	//Needs authentification
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "loans")
 	public ResponseEntity<?> findLoansByUser(){
 		
 		User user = getUserAuthentified();
+		
+		if(user == null) {
+			
+			return new ResponseEntity<>(ErrorMessages.INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST);
+		}
 		
 		List<Loan> loans = loanService.findLoansByUserId(user.getId());
 		
@@ -353,10 +362,16 @@ public class AppController {
 	}
 	
 	//Needs authentification
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "reservations")
 	public ResponseEntity<?> findReservationsByUser(){
 		
 		User user = getUserAuthentified();
+		
+		if(user == null) {
+			
+			return new ResponseEntity<>(ErrorMessages.INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST);
+		}
 		
 		List<Reservation> reservations = reservationService.findReservationsByUserId(user.getId());
 		
