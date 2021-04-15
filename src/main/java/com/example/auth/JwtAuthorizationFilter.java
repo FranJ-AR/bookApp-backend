@@ -45,11 +45,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
-        List<String> enum1 = Collections.list(request.getHeaderNames());
-        int numberHeaders = enum1.size();
         if (authorizationHeader != null && 
         		
         		authorizationHeader.startsWith(HEADER_TOKEN_PREFIX )) {
+        	
             String token = authorizationHeader.replace(HEADER_TOKEN_PREFIX, "");
             
             if( jwtService != null && jwtService.hasTokenExpired(token)) {
