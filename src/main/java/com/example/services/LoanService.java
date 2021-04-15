@@ -41,7 +41,9 @@ public class LoanService {
 		
 		LoanKey loanKey = new LoanKey(user.getId(), book.getId());
 			
-		Loan loan = new Loan(user, book, ZonedDateTime.now(), loanKey, false, Loan.calculateDateReturn());
+		Loan loan = new Loan(user, book, ZonedDateTime.now(), loanKey, 
+				Loan.calculateDateReturn(),
+				Loan.calculateMaximumDatePickedUp());
 		
 		loanRepository.save(loan);
 				

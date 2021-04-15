@@ -5,28 +5,35 @@ import java.time.ZonedDateTime;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 public class Loan extends BaseLoanAndReservation{
 	
 	public static final Integer DAYS_TO_RETURN = 15;
 	
+	public static final Integer DAYS_TO_PICK_UP = 2;
+	
 	@EmbeddedId
 	private LoanKey loanKey;
-	
-	private Boolean beenPickedUp;
-	
+		
 	private ZonedDateTime maximumReturnDate;
+	
+	private ZonedDateTime maximumPickedUpDate;
 
 	public Loan() {
 		super();
 	}
 	
 	public Loan(User user, Book book, ZonedDateTime timestamp, LoanKey loanKey, 
-			boolean beenPickedUp, ZonedDateTime maximumReturnDate) {
+			 ZonedDateTime maximumReturnDate, ZonedDateTime maximumPickedUpDate) {
 		super(user, book, timestamp);
 		this.loanKey = loanKey;
-		this.beenPickedUp = beenPickedUp;
 		this.maximumReturnDate = maximumReturnDate;
+		this.maximumPickedUpDate = maximumPickedUpDate;
 		
 	}
 
@@ -39,11 +46,7 @@ public class Loan extends BaseLoanAndReservation{
 	}
 
 	public boolean isBeenPickedUp() {
-		return beenPickedUp;
-	}
-
-	public void setBeenPickedUp(boolean beenPickedUp) {
-		this.beenPickedUp = beenPickedUp;
+		return maximumPickedUpDate == null;
 	}
 
 	public ZonedDateTime getMaximumReturnDate() {
@@ -53,8 +56,16 @@ public class Loan extends BaseLoanAndReservation{
 	public void setMaximumReturnDate(ZonedDateTime maximumReturnDate) {
 		this.maximumReturnDate = maximumReturnDate;
 	}
+
+	public ZonedDateTime getMaximumPickedUpDate() {
+		return maximumPickedUpDate;
+	}
+
+	public void setMaximumPickedUpDate(ZonedDateTime maximumPickedUpDate) {
+		this.maximumPickedUpDate = maximumPickedUpDate;
+	}
 	
-	public static ZonedDateTime calculateDateReturn() {
+public static ZonedDateTime calculateDateReturn() {
 		
 		ZonedDateTime zonedDateTime = ZonedDateTime.now();
 		
@@ -66,5 +77,18 @@ public class Loan extends BaseLoanAndReservation{
 		return zonedDateTime;
 	}
 	
-
+	public static ZonedDateTime calculateMaximumDatePickedUp() {
+		
+		ZonedDateTime zonedDateTime = ZonedDateTime.now();
+		
+		zonedDateTime = zonedDateTime.plusDays(DAYS_TO_PICK_UP)
+				.withHour(23)
+				.withMinute(59)
+				.withSecond(59);
+		
+		return zonedDateTime;
+			
+	}
+	
+	
 }
