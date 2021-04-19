@@ -1,5 +1,7 @@
 package com.example.auth;
 
+import com.example.entity.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,17 @@ public class AuthenticationResponse {
 		
 	}
     
+	public Integer getMaximumBooksLoan() {
+		
+		return User.MAX_LOANS;
+			
+	}
+	
+	public Integer getMaximumBooksReservation() {
+		
+		return User.MAX_RESERVATIONS;	
+		
+	}
     
 
-	
 }
