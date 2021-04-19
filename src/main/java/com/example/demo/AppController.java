@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -317,7 +318,7 @@ public class AppController {
 	
 	//Needs authentification
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(value = "/remove-reservation/{id}")
+	@DeleteMapping(value = "/remove-reservation/{id}")
 	public ResponseEntity<?> removeReservation(@PathVariable("id") int bookId)
 	{
 		
