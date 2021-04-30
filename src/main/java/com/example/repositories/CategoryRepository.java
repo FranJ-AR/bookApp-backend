@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.entity.Category;
-import com.example.entity.Subcategory;
+import com.example.model.Category;
+import com.example.model.Subcategory;
 
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer>{

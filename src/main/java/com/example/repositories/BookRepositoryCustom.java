@@ -3,7 +3,7 @@ package com.example.repositories;
 import java.util.List;
 
 import com.example.demo.BookParamsFinder;
-import com.example.entity.Book;
+import com.example.model.Book;
 
 public interface BookRepositoryCustom {
 	

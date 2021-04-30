@@ -5,8 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.entity.Loan;
-import com.example.entity.LoanKey;
+import com.example.model.Loan;
+import com.example.model.LoanKey;
 
 @Repository
 public interface LoanRepository extends CrudRepository<Loan,LoanKey> {

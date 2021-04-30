@@ -9,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.entity.Book;
-import com.example.entity.Loan;
-import com.example.entity.Reservation;
-import com.example.entity.ReservationKey;
-import com.example.entity.User;
 import com.example.exceptions.CustomCannotReservateLoanAvailableException;
 import com.example.exceptions.CustomReservationAlreadyExistsException;
 import com.example.exceptions.CustomReservationNotExistsException;
 import com.example.exceptions.CustomUserReservationLimitReachedException;
+import com.example.model.Book;
+import com.example.model.Loan;
+import com.example.model.Reservation;
+import com.example.model.ReservationKey;
+import com.example.model.User;
 import com.example.repositories.ReservationRepository;
 
 @Service

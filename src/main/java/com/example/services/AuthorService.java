@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.Author;
+import com.example.model.Author;
 import com.example.repositories.AuthorRepository;
 
 @Service

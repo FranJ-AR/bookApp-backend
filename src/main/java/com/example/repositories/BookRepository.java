@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.entity.Book;
+import com.example.model.Book;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Integer>, BookRepositoryCustom{

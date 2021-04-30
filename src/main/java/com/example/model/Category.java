@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.model;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties("books")
-public class Subcategory {
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,10 @@ public class Subcategory {
 	private String name;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy="subcategory", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="category", fetch = FetchType.LAZY)
 	private List<Book> books;
 
-	public Subcategory() {
+	public Category() {
 		super();
 	}
 
@@ -55,7 +55,6 @@ public class Subcategory {
 		this.books = books;
 	}
 
-	
 	
 
 }

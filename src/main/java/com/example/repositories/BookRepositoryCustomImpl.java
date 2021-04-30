@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.BookParamsFinder;
-import com.example.entity.Book;
+import com.example.model.Book;
 
 public class BookRepositoryCustomImpl implements BookRepositoryCustom{
 	

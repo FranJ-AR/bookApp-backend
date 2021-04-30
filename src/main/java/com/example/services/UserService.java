@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.User;
+import com.example.model.User;
 import com.example.repositories.UserRepository;
 
 @Service

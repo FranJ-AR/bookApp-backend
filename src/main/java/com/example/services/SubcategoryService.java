@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.Subcategory;
+import com.example.model.Subcategory;
 import com.example.repositories.SubcategoryRepository;
 
 @Service

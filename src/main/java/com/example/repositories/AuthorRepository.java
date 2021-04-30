@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.entity.Author;
+import com.example.model.Author;
 
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Integer>{

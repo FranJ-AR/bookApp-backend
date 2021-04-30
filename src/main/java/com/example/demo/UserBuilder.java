@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.entity.User;
+import com.example.model.User;
 
 public class UserBuilder {
 	

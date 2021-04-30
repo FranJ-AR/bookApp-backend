@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.model;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties("books")
-public class Category {
+public class Author {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,11 @@ public class Category {
 	private String name;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy="category", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("books")
+	@OneToMany(mappedBy="author",fetch = FetchType.LAZY)
 	private List<Book> books;
 
-	public Category() {
+	public Author() {
 		super();
 	}
 

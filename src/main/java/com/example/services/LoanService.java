@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.entity.Book;
-import com.example.entity.Loan;
-import com.example.entity.LoanKey;
-import com.example.entity.User;
 import com.example.exceptions.CustomLoanAlreadyExistsException;
 import com.example.exceptions.CustomMaximumUserBooksLoanedException;
 import com.example.exceptions.CustomNoCopiesForLoanAvailableException;
+import com.example.model.Book;
+import com.example.model.Loan;
+import com.example.model.LoanKey;
+import com.example.model.User;
 import com.example.repositories.BookRepository;
 import com.example.repositories.LoanRepository;
 
