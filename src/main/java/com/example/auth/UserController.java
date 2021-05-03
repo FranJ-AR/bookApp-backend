@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Constants;
 import com.example.demo.ErrorMessages;
 import com.example.exceptions.CustomUserPasswordSizeException;
 import com.example.services.CustomValidatorService;
@@ -32,7 +33,7 @@ public class UserController {
 	@Autowired
 	private CustomValidatorService customValidatorService;
  
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
     @PostMapping("/login")
     public ResponseEntity<?> createToken(@RequestBody(required=false) AuthenticationRequest authenticationRequest) throws Exception {
 		

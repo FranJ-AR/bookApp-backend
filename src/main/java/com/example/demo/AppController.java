@@ -76,7 +76,7 @@ public class AppController {
 	@Autowired
 	private ReservationService reservationService;
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/private-action", produces = "application/json")
 	public ResponseEntity<Object> logged() {
 
@@ -89,7 +89,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/public-action", produces = "application/json")
 	public ResponseEntity<Object> anonym() {
 
@@ -98,7 +98,7 @@ public class AppController {
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "http://localhost:8080")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@RequestMapping("/add-default")
 	@ResponseBody
 	public String anyMap() {
@@ -125,7 +125,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<?> register(@RequestBody(required = false) UserBuilder userBuilder) {
@@ -168,7 +168,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-books", produces = "application/json")
 	public ResponseEntity<List<Book>> getAllBooks() {
 
@@ -178,7 +178,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-categories", produces = "application/json")
 	public ResponseEntity<List<Category>> getAllCategories() {
 
@@ -187,7 +187,7 @@ public class AppController {
 		return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-subcategories", produces = "application/json")
 	public ResponseEntity<List<Subcategory>> getAllSubCategories() {
 
@@ -196,7 +196,7 @@ public class AppController {
 		return new ResponseEntity<List<Subcategory>>(subcategories, HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/authors-by-substring-name/author={author}", produces = "application/json")
 	public ResponseEntity<?> getAllAuthorsBySubstringName(@PathVariable("author") String substringAuthor) {
 
@@ -216,7 +216,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping(value = "/books-by-params", produces = "application/json")
 	public ResponseEntity<?> getAllBooksByParams(@RequestBody(required = false) BookParamsFinder bookParamsFinder) {
 
@@ -242,7 +242,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping(value = "/add-loan/{id}")
 	public ResponseEntity<?> addLoan(@PathVariable("id") Integer bookId) 
 			throws CustomNoCopiesForLoanAvailableException, CustomMaximumUserBooksLoanedException, 
@@ -281,7 +281,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping(value = "/add-reservation/{id}")
 	public ResponseEntity<?> addReservation(@PathVariable("id") int bookId){
 		
@@ -317,7 +317,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@DeleteMapping(value = "/remove-reservation/{id}")
 	public ResponseEntity<?> removeReservation(@PathVariable("id") int bookId)
 	{
@@ -346,7 +346,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "loans")
 	public ResponseEntity<?> findLoansByUser(){
 		
@@ -363,7 +363,7 @@ public class AppController {
 	}
 	
 	//Needs authentification
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "reservations")
 	public ResponseEntity<?> findReservationsByUser(){
 		
