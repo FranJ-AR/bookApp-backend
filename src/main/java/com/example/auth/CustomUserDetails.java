@@ -9,11 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.model.User;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public class CustomUserDetails implements UserDetails{
 	
 	/**
