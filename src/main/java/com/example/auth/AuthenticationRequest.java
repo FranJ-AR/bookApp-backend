@@ -1,11 +1,8 @@
 package com.example.auth;
 
-import com.example.model.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
