@@ -43,6 +43,11 @@ public class CategoryService {
 		
 		return categoryRepository.existsById(id);
 	}
+
+	public boolean existsById(Long categoryId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }

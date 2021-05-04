@@ -25,11 +25,11 @@ public class AuthorService {
 		
 	}
 	
-	public boolean existsById(Integer id) {
+	public boolean existsById(Long authorId) {
 		
-		if(id == null) return false;
+		if(authorId == null) return false;
 		
-		return authorRepository.existsById(id);
+		return authorRepository.existsById(authorId);
 	}
 
 }

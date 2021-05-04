@@ -4,11 +4,11 @@ public class BookParamsFinder {
 
 	private String titleSubstring;
 
-	private Integer authorId;
+	private Long authorId;
 
-	private Integer categoryId;
+	private Long categoryId;
 
-	private Integer subcategoryId;
+	private Long subcategoryId;
 
 	public BookParamsFinder() {
 		super();
@@ -22,27 +22,27 @@ public class BookParamsFinder {
 		this.titleSubstring = titleSubstring;
 	}
 
-	public Integer getAuthorId() {
+	public Long getAuthorId() {
 		return authorId;
 	}
 
-	public void setAuthorId(Integer authorId) {
+	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
 	}
 
-	public Integer getCategoryId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(Integer categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public Integer getSubcategoryId() {
+	public Long getSubcategoryId() {
 		return subcategoryId;
 	}
 
-	public void setSubcategoryId(Integer subcategoryId) {
+	public void setSubcategoryId(Long subcategoryId) {
 		this.subcategoryId = subcategoryId;
 	}
 

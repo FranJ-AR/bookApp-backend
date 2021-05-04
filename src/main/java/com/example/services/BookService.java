@@ -41,11 +41,11 @@ public class BookService {
 		
 		String titleSubstring = bookParamsFinder.getTitleSubstring();
 		
-		Integer authorId = bookParamsFinder.getAuthorId();
+		Long authorId = bookParamsFinder.getAuthorId();
 		
-		Integer categoryId = bookParamsFinder.getCategoryId();
+		Long categoryId = bookParamsFinder.getCategoryId();
 		
-		Integer subcategoryId = bookParamsFinder.getSubcategoryId();
+		Long subcategoryId = bookParamsFinder.getSubcategoryId();
 		
 		// If an element does not exist on the DB, make it null
 		

@@ -31,4 +31,9 @@ public class SubcategoryService {
 		return subcategoryRepository.existsById(id);
 	}
 
+	public boolean existsById(Long subcategoryId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

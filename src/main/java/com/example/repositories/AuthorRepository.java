@@ -14,4 +14,6 @@ public interface AuthorRepository extends CrudRepository<Author, Integer>{
 	@Query("SELECT a FROM Author a WHERE a.name LIKE %:substringName% ORDER BY a.name")
 	public Iterable<Author> findAllBySubstringName(@Param("substringName")String substringName);
 
+	public boolean existsById(Long authorId);
+
 }
