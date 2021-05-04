@@ -12,7 +12,7 @@ import com.example.model.LoanKey;
 public interface LoanRepository extends CrudRepository<Loan,LoanKey> {
 	
 	@Query("SELECT loan FROM Loan loan WHERE :userId = user_id")
-	public Iterable<Loan> findLoansByUserId(@Param("userId") Integer userId);
+	public Iterable<Loan> findLoansByUserId(@Param("userId") Long userId);
 		
 		
 	

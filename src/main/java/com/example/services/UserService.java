@@ -25,11 +25,11 @@ public class UserService {
 		
 	}
 	
-	public Integer saveUser(User user) {
+	public Long saveUser(User user) {
 		
 		if(existsUser(user.getName())) {
 			
-			return -1; //if user exists, fail to add to the DB
+			return (long) -1; //if user exists, fail to add to the DB
 		}
 		
 		String encodedPassword = 
