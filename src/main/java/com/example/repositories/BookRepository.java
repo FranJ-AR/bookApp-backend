@@ -20,13 +20,12 @@ public interface BookRepository extends CrudRepository<Book, Integer>, BookRepos
 	 */
 	
 	  @Query("SELECT book FROM Book book WHERE 1=1 " +
-	  "and (:authorId is null or :authorId = author_id) " +
-	  "and (:categoryId is null or :categoryId = category_id) " +
-	  "and (:subcategoryId is null or :subcategoryId = subcategory_id) " +
-	  "and (:titleSubstring is null or book.name LIKE %:titleSubstring%)" )
+	  "AND (:authorId IS NULL OR :authorId = author_id) " +
+	  "AND (:categoryId IS NULL OR :categoryId = category_id) " +
+	  "AND (:subcategoryId IS NULL OR :subcategoryId = subcategory_id) " +
+	  "AND (:titleSubstring IS NULL OR book.name LIKE %:titleSubstring%)" )
 	 
-	 
-			
+
 	public Iterable<Book> findBooksByParams(
 			@Param("titleSubstring") 
 			String titleSubstring, 
