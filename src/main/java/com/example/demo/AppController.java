@@ -175,7 +175,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = Constants.HOST_URL)
+	//@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-categories", produces = "application/json")
 	public ResponseEntity<List<Category>> getAllCategories() {
 
