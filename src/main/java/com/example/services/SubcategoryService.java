@@ -24,16 +24,11 @@ public class SubcategoryService {
 		return subcategories;
 	}
 	
-	public boolean existsById(Integer id) {
+	public boolean existsById(Long id) {
 		
 		if(id == null) return false;
 		
 		return subcategoryRepository.existsById(id);
-	}
-
-	public boolean existsById(Long subcategoryId) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

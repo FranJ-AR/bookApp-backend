@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.example.model.Subcategory;
 
 @Repository
-public interface SubcategoryRepository extends CrudRepository<Subcategory, Integer>{
+public interface SubcategoryRepository extends CrudRepository<Subcategory, Long>{
 	
 	@Query("SELECT s FROM Subcategory s ORDER BY s.name")
 	public Iterable<Subcategory> findAllOrderedASC();

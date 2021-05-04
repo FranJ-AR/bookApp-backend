@@ -51,11 +51,11 @@ public class BookService {
 		
 		//if( titleSubstring == null) titleSubstring = "";
 		
-		if( !authorService.existsById(authorId)) authorId = null;
+		if( !authorService.existsById(authorId)) authorId = (long)-1;
 		
-		if( !categoryService.existsById(categoryId)) categoryId = null;
+		if( !categoryService.existsById(categoryId)) categoryId = (long)-1;
 		
-		if( !subcategoryService.existsById(subcategoryId)) subcategoryId = null;
+		if( !subcategoryService.existsById(subcategoryId)) subcategoryId = (long)-1;
 		
 		Iterable<Book> iterableBook = bookRepository.findBooksByParams( titleSubstring,
 				authorId, categoryId, subcategoryId);
@@ -69,7 +69,7 @@ public class BookService {
 		
 	}
 	
-	public Book findById(int bookId) {
+	public Book findById(long bookId) {
 		
 		Optional<Book> optionalBook = bookRepository.findById(bookId);
 		

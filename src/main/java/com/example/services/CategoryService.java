@@ -18,7 +18,7 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 	
 	@Deprecated
-	public List<Book> getBooksFromCategory(int categoryId) {
+	public List<Book> getBooksFromCategory(long categoryId) {
 		
 		Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
 		
@@ -37,16 +37,11 @@ public class CategoryService {
 		return categories;
 	}
 	
-	public boolean existsById(Integer id) {
+	public boolean existsById(Long id) {
 		
 		if(id == null) return false;
 		
 		return categoryRepository.existsById(id);
-	}
-
-	public boolean existsById(Long categoryId) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	

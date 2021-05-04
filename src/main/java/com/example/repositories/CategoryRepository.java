@@ -8,7 +8,7 @@ import com.example.model.Category;
 import com.example.model.Subcategory;
 
 @Repository
-public interface CategoryRepository extends CrudRepository<Category, Integer>{
+public interface CategoryRepository extends CrudRepository<Category, Long>{
 	
 	@Query("SELECT c FROM Category c ORDER BY c.name")
 	public Iterable<Category> findAllOrderedASC();

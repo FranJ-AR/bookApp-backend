@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.model.Author;
 
 @Repository
-public interface AuthorRepository extends CrudRepository<Author, Integer>{
+public interface AuthorRepository extends CrudRepository<Author, Long>{
 	
 	//@Query("SELECT a FROM Author a WHERE lower(a.name) LIKE lower(concat('%', :substringName,'%')) ORDER BY a.name")
 	@Query("SELECT a FROM Author a WHERE a.name LIKE %:substringName% ORDER BY a.name")
