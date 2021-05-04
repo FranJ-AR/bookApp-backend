@@ -29,11 +29,11 @@ public interface BookRepository extends CrudRepository<Book, Integer>, BookRepos
 	public Iterable<Book> findBooksByParams(
 			@Param("titleSubstring") 
 			String titleSubstring, 
-			@Param("authorId") Integer authorId, 
+			@Param("authorId") Long authorId, 
 			@Param("categoryId") 
-			Integer categoryId, 
+			Long categoryId, 
 			@Param("subcategoryId") 
-			Integer subcategoryId);
+			Long subcategoryId);
 	
 	/*
 	 * @Query("SELECT book FROM Book book WHERE 1 " +
