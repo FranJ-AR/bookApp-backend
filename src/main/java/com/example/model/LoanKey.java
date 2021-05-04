@@ -20,7 +20,7 @@ public class LoanKey extends BaseLoanAndReservationKey implements Serializable{
 		super();
 	}
 
-	public LoanKey(Integer userId, Integer bookId) {
+	public LoanKey(Long userId, Long bookId) {
 		super(userId, bookId);
 	}
 	

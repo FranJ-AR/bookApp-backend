@@ -13,6 +13,6 @@ import com.example.model.ReservationKey;
 public interface ReservationRepository extends CrudRepository<Reservation, ReservationKey>{
 	
 	@Query("SELECT reservation FROM Reservation reservation WHERE :userId = user_id")
-	public Iterable<Reservation> findReservationsByUserId(@Param("userId") Integer userId);
+	public Iterable<Reservation> findReservationsByUserId(@Param("userId") Long userId);
 
 }

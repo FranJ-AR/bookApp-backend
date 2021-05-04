@@ -19,7 +19,7 @@ public class ReservationKey extends BaseLoanAndReservationKey implements Seriali
 		super();
 	}
 
-	public ReservationKey(Integer userId, Integer bookId) {
+	public ReservationKey(Long userId, Long bookId) {
 		super(userId, bookId);
 	}
 	

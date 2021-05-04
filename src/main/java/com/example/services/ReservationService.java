@@ -62,11 +62,11 @@ public class ReservationService {
 
 	}
 
-	public List<Reservation> findReservationsByUserId(Integer userId) {
+	public List<Reservation> findReservationsByUserId(Long long1) {
 
 		List<Reservation> reservations = new ArrayList<Reservation>();
 
-		reservationRepository.findReservationsByUserId(userId).forEach(reservations::add);
+		reservationRepository.findReservationsByUserId(long1).forEach(reservations::add);
 
 		return reservations;
 	}

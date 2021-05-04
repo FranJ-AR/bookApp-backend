@@ -49,11 +49,11 @@ public class LoanService {
 				
 	}
 	
-	public List<Loan> findLoansByUserId(Integer userId){
+	public List<Loan> findLoansByUserId(Long long1){
 		
 		List<Loan> loans = new ArrayList<Loan>();
 		
-		loanRepository.findLoansByUserId(userId).forEach(loans::add);
+		loanRepository.findLoansByUserId(long1).forEach(loans::add);
 		
 		return loans;
 	}

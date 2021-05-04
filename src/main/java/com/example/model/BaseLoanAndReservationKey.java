@@ -15,33 +15,33 @@ public class BaseLoanAndReservationKey implements Serializable{
 	 */
 	private static final long serialVersionUID = 7402573353141650645L;
 
-	private Integer userId;
+	private Long userId;
 	
-	private Integer bookId;
+	private Long bookId;
 
 	public BaseLoanAndReservationKey() {
 		super();
 	}
 
-	public BaseLoanAndReservationKey(Integer userId, Integer bookId) {
+	public BaseLoanAndReservationKey(Long userId2, Long bookId2) {
 		super();
-		this.userId = userId;
-		this.bookId = bookId;
+		this.userId = userId2;
+		this.bookId = bookId2;
 	}
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public Integer getBookId() {
+	public Long getBookId() {
 		return bookId;
 	}
 
-	public void setBookId(Integer bookId) {
+	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
 
