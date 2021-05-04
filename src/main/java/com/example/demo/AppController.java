@@ -122,7 +122,7 @@ public class AppController {
 
 	}
 
-	//@CrossOrigin(origins = Constants.HOST_URL)
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<?> register(@RequestBody(required = false) UserBuilder userBuilder) {
@@ -165,7 +165,7 @@ public class AppController {
 
 	}
 
-	//@CrossOrigin(origins = Constants.HOST_URL)
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-books", produces = "application/json")
 	public ResponseEntity<List<Book>> getAllBooks() {
 
@@ -175,7 +175,7 @@ public class AppController {
 
 	}
 
-	//@CrossOrigin(origins = Constants.HOST_URL)
+	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-categories", produces = "application/json")
 	public ResponseEntity<List<Category>> getAllCategories() {
 
