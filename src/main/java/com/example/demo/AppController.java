@@ -2,7 +2,6 @@ package com.example.demo;
 
 import java.util.List;
 
-import org.apache.coyote.http11.Http11OutputBuffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ import com.example.exceptions.CustomMaximumUserBooksLoanedException;
 import com.example.exceptions.CustomNoCopiesForLoanAvailableException;
 import com.example.exceptions.CustomReservationAlreadyExistsException;
 import com.example.exceptions.CustomReservationNotExistsException;
-import com.example.exceptions.CustomUserLoanLimitReachedException;
 import com.example.exceptions.CustomUserPasswordSizeException;
 import com.example.exceptions.CustomUserReservationLimitReachedException;
 import com.example.model.Author;
@@ -35,7 +33,6 @@ import com.example.model.Loan;
 import com.example.model.Reservation;
 import com.example.model.Subcategory;
 import com.example.model.User;
-import com.example.repositories.LoanRepository;
 import com.example.services.AuthorService;
 import com.example.services.BookService;
 import com.example.services.CategoryService;
@@ -125,7 +122,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = Constants.HOST_URL)
+	//@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<?> register(@RequestBody(required = false) UserBuilder userBuilder) {
@@ -168,7 +165,7 @@ public class AppController {
 
 	}
 
-	@CrossOrigin(origins = Constants.HOST_URL)
+	//@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/all-books", produces = "application/json")
 	public ResponseEntity<List<Book>> getAllBooks() {
 
