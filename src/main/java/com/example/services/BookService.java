@@ -58,7 +58,7 @@ public class BookService {
 		if( !subcategoryService.existsById(subcategoryId)) subcategoryId = null;
 		
 		Iterable<Book> iterableBook = bookRepository.findBooksByParams( titleSubstring,
-				(Long)authorId.longValue(), (Long)categoryId.longValue(), (Long)subcategoryId.longValue());
+				authorId, categoryId, subcategoryId);
 		
 		List<Book> books = new ArrayList<Book>();
 				
