@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @JsonIgnoreProperties({"id","password","loans","reservations"})
-@Table(name = "userApp")
+@Table(name = "user_app")
 public class User {
 	
 	public static final Integer MAX_LOANS = 6;
