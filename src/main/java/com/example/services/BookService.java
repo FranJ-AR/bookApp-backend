@@ -49,7 +49,7 @@ public class BookService {
 		
 		// If an element does not exist on the DB, make it null
 		
-		//if( titleSubstring == null) titleSubstring = "";
+		if( titleSubstring == null) titleSubstring = "";
 		
 		if( !authorService.existsById(authorId)) authorId = (long)-1;
 		

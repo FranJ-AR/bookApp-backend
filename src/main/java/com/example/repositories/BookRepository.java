@@ -22,11 +22,12 @@ public interface BookRepository extends CrudRepository<Book, Long>, BookReposito
 	
 	  //@Query(value = "SELECT book FROM Book book WHERE 1=1", nativeQuery = true)
 
-	  @Query(value = "SELECT book FROM Book book WHERE 1=1 " +
+	  @Query(value = "SELECT * FROM Book book WHERE 1=1 " +
 	  "AND (:authorId = -1 OR :authorId = author_id) " +
 	  "AND (:categoryId = -1 OR :categoryId = category_id) " +
 	  "AND (:subcategoryId = -1 OR :subcategoryId = subcategory_id) " +
-	  "AND (:titleSubstring IS NULL OR book.book_name LIKE %:titleSubstring%)", nativeQuery = true)
+	  //"AND (1 = 1 OR book_name like :titleSubstring)", nativeQuery = true)
+	  "AND (:titleSubstring = \'\' OR book_name LIKE %:titleSubstring%)", nativeQuery = true)
 	 
 
 	public Iterable<Book> findBooksByParams(
