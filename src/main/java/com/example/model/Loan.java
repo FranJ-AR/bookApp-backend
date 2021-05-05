@@ -70,7 +70,7 @@ public static ZonedDateTime calculateDateReturn() {
 		ZonedDateTime zonedDateTime = ZonedDateTime.now();
 		
 		zonedDateTime = zonedDateTime.plusDays(DAYS_TO_RETURN)
-				.withHour(23)
+				.withHour(21)
 				.withMinute(59)
 				.withSecond(59);
 		
@@ -82,7 +82,7 @@ public static ZonedDateTime calculateDateReturn() {
 		ZonedDateTime zonedDateTime = ZonedDateTime.now();
 		
 		zonedDateTime = zonedDateTime.plusDays(DAYS_TO_PICK_UP)
-				.withHour(23)
+				.withHour(21)
 				.withMinute(59)
 				.withSecond(59);
 		
