@@ -108,16 +108,6 @@ public class AppController {
 
 		userService.saveUser(simpleUser);
 
-		String passwrd1 = bCryptPasswordEncoder1.encode("casa1");
-
-		String passwrd2 = bCryptPasswordEncoder1.encode("casa1");
-
-		System.out.println("passK " + passwrd1);
-
-		System.out.println("passK " + passwrd2);
-
-		System.out.println("matches?" + bCryptPasswordEncoder1.matches("casa", passwrd1));
-
 		return "Created User";
 
 	}

@@ -56,8 +56,6 @@ public class UserController {
         
         } catch (UsernameNotFoundException e2) {
         	
-        	System.out.println(e2);
-
         	return new ResponseEntity<ErrorMessages>(ErrorMessages.USERNAME_NOT_FOUND, HttpStatus.BAD_REQUEST);
         
         } catch (BadCredentialsException e3) {
@@ -75,7 +73,6 @@ public class UserController {
         
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         String token = jwtService.createToken(userDetails);
-        System.out.println("token"+ token);
         AuthenticationResponse authenticationResponse = new AuthenticationResponse(token);
         return new ResponseEntity<AuthenticationResponse>(authenticationResponse, HttpStatus.OK);
     }

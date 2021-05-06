@@ -16,7 +16,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtService {
     public static final int EXPIRATION_TIME_TOKEN = 1000 * 60 * 60; // in ms
-	//public static final int EXPIRATION_TIME_TOKEN = 1000 * 60; // in ms
     private static final String AUTHORITIES = "authorities";
     private final String SECRET_KEY;
  
@@ -54,7 +53,7 @@ public class JwtService {
         	
         }catch(Exception e) {
         	
-        	System.out.println("Error processing the token or token not valid");
+        	// Error processing the token or token not valid
         	return true;
         }
         

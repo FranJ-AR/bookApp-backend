@@ -43,7 +43,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             
             if( jwtService != null && jwtService.hasTokenExpired(token)) {
             	
-            	System.out.println("JwtAuthorization warn: Token expired or not valid");
+            	//JwtAuthorization warn: Token expired or not valid
             	filterChain.doFilter(request, response);
             	return;
             	
@@ -58,9 +58,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             
             }catch(UsernameNotFoundException exception) {
             	
-            	//sendFilterErrorResponse(response, 403, ErrorMessages.INVALID_OR_EXPIRED_TOKEN_OR_USER_NOT_FOUND);
-
-            	System.out.println("User not found with that token");
+            	//User not found with that token
             	filterChain.doFilter(request, response);
                 return; 
             }
