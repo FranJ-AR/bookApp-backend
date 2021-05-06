@@ -14,7 +14,9 @@ public interface BookRepositoryImpl extends CrudRepository<Book, Long>, BookRepo
 			  "AND (:authorId = -1 OR :authorId = author_id) " +
 			  "AND (:categoryId = -1 OR :categoryId = category_id) " +
 			  "AND (:subcategoryId = -1 OR :subcategoryId = subcategory_id) " +
-			  "AND (:titleSubstring = \'\' OR book_name LIKE %:titleSubstring%) order by book_name", nativeQuery = true)
+			  "AND (:titleSubstring = \'\' " +
+			  "OR lower(book_name) LIKE lower(concat('%', :titleSubString,'%')) "+
+			  "order by book_name", nativeQuery = true)
 			 
 
 			public Iterable<Book> findBooksByParams(
