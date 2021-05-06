@@ -1,9 +1,5 @@
 package com.example.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-
 public class AuthenticationRequest {
     private String username;
     private String password;

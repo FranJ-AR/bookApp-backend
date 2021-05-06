@@ -5,10 +5,6 @@ import java.time.ZonedDateTime;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import org.hibernate.annotations.Proxy;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 public class Loan extends BaseLoanAndReservation{

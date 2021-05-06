@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.example.model.User;
-import com.example.repositories.UserRepository;
 import com.example.services.UserService;
 
 import lombok.RequiredArgsConstructor;

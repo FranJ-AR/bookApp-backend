@@ -16,7 +16,6 @@ import com.example.model.Book;
 import com.example.model.Loan;
 import com.example.model.LoanKey;
 import com.example.model.User;
-import com.example.repositories.BookRepository;
 import com.example.repositories.LoanRepository;
 
 @Service
@@ -24,9 +23,6 @@ public class LoanService {
 	
 	@Autowired
 	private LoanRepository loanRepository;
-	
-	@Autowired
-	private BookRepository bookRepository;
 	
 	@Transactional
 	public void createNewLoan(Book book, User user) 

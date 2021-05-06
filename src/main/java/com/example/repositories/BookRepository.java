@@ -1,9 +1,5 @@
 package com.example.repositories;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.hibernate.jpa.TypedParameterValue;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

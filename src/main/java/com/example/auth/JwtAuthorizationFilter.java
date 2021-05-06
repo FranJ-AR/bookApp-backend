@@ -1,7 +1,6 @@
 package com.example.auth;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.example.demo.ErrorMessages;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
@@ -28,10 +25,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
  
     @Autowired
     private JwtService jwtService;
-    
-    @Autowired
-    private CustomExceptionController customExceptionController;
- 
+     
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
@@ -70,22 +64,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response);
-    }
-    
-    @Deprecated 
-    // Better not to inform the user whether the token is expired, not valid or it is not associated to a current user
-    private void sendFilterErrorResponse(HttpServletResponse response, int errorCode, ErrorMessages errorMessages) throws IOException {
-    	
-    	response.setStatus(errorCode);
-        response.setContentType("application/json");
-
-        //pass down the actual obj that exception handler normally send
-        ObjectMapper mapper = new ObjectMapper();
-        PrintWriter out = response.getWriter(); 
-        out.print(mapper.writeValueAsString(errorMessages));
-        out.flush();
-    	
-    
     }
 
 }

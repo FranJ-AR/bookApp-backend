@@ -14,7 +14,6 @@ import com.example.exceptions.CustomReservationAlreadyExistsException;
 import com.example.exceptions.CustomReservationNotExistsException;
 import com.example.exceptions.CustomUserReservationLimitReachedException;
 import com.example.model.Book;
-import com.example.model.Loan;
 import com.example.model.Reservation;
 import com.example.model.ReservationKey;
 import com.example.model.User;
