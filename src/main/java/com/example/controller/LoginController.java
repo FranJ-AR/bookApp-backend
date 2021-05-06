@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class LoginController {
  
 	@Autowired
     private AuthenticationManager authenticationManager;
