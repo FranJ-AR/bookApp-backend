@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan({"com.example.auth","com.example.demo","com.example.controller"})
+@ComponentScan({"com.example.auth","com.example.demo"})
 @EnableJpaRepositories({"com.example.repositories"})
 @EntityScan("com.example.model")
 public class LibraryAppApplication {

@@ -2,8 +2,8 @@ package com.example.services;
 
 import java.util.List;
 
+import com.example.demo.BookParamsFinder;
 import com.example.model.Book;
-import com.example.model.BookParamsFinder;
 
 public interface BookService {
 

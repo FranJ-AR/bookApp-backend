@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.auth.AuthenticationRequest;
-import com.example.auth.AuthenticationResponse;
-import com.example.auth.CustomUserDetailsService;
-import com.example.auth.JwtService;
 import com.example.demo.Constants;
+import com.example.demo.ErrorMessages;
 import com.example.exceptions.CustomUserPasswordSizeException;
-import com.example.exceptions.ErrorMessages;
 import com.example.services.CustomValidatorService;
 
 import lombok.RequiredArgsConstructor;
