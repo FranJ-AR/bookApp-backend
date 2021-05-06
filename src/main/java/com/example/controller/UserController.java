@@ -17,7 +17,7 @@ import com.example.auth.AuthenticationRequest;
 import com.example.auth.AuthenticationResponse;
 import com.example.auth.CustomUserDetailsService;
 import com.example.auth.JwtService;
-import com.example.config.Constants;
+import com.example.constants.Constants;
 import com.example.exceptions.CustomUserPasswordSizeException;
 import com.example.exceptions.ErrorMessages;
 import com.example.services.CustomValidatorService;
