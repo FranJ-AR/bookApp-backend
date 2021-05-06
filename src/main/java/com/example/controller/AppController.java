@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.controller;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.Constants;
 import com.example.exceptions.CustomCannotReservateLoanAvailableException;
 import com.example.exceptions.CustomLoanAlreadyExistsException;
 import com.example.exceptions.CustomMaximumUserBooksLoanedException;
@@ -25,13 +26,16 @@ import com.example.exceptions.CustomReservationAlreadyExistsException;
 import com.example.exceptions.CustomReservationNotExistsException;
 import com.example.exceptions.CustomUserPasswordSizeException;
 import com.example.exceptions.CustomUserReservationLimitReachedException;
+import com.example.exceptions.ErrorMessages;
 import com.example.model.Author;
 import com.example.model.Book;
+import com.example.model.BookParamsFinder;
 import com.example.model.Category;
 import com.example.model.Loan;
 import com.example.model.Reservation;
 import com.example.model.Subcategory;
 import com.example.model.User;
+import com.example.model.UserBuilder;
 import com.example.services.AuthorService;
 import com.example.services.BookService;
 import com.example.services.CategoryService;
