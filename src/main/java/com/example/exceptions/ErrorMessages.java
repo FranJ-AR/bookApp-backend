@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.exceptions;
 
 import java.time.ZonedDateTime;
 

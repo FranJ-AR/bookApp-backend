@@ -1,6 +1,4 @@
-package com.example.demo;
-
-import com.example.model.User;
+package com.example.model;
 
 public class UserBuilder {
 	

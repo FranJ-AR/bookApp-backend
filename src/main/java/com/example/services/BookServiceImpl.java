@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.BookParamsFinder;
 import com.example.model.Book;
+import com.example.model.BookParamsFinder;
 import com.example.repositories.BookRepository;
 
 @Service
