@@ -8,13 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.example.model.Book;
 
 @Repository
-public interface BookRepositoryImp extends CrudRepository<Book, Long>, IBookRepository{
+public interface BookRepositoryImpl extends CrudRepository<Book, Long>, BookRepository{
 	
 	 @Query(value = "SELECT * FROM Book book WHERE 1=1 " +
 			  "AND (:authorId = -1 OR :authorId = author_id) " +
 			  "AND (:categoryId = -1 OR :categoryId = category_id) " +
 			  "AND (:subcategoryId = -1 OR :subcategoryId = subcategory_id) " +
-			  //"AND (1 = 1 OR book_name like :titleSubstring)", nativeQuery = true)
 			  "AND (:titleSubstring = \'\' OR book_name LIKE %:titleSubstring%) order by book_name", nativeQuery = true)
 			 
 

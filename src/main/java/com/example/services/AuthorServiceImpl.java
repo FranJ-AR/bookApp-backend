@@ -7,20 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Author;
-import com.example.repositories.AuthorRepositoryImp;
+import com.example.repositories.AuthorRepository;
+import com.example.repositories.AuthorRepositoryImpl;
 
 @Service
-public class AuthorServiceImp implements IAuthorService {
+public class AuthorServiceImpl implements AuthorService {
 	
 	@Autowired
-	public AuthorRepositoryImp authorRepositoryImp;
+	public AuthorRepository authorRepository;
 	
 	@Override
 	public List<Author> findAllBySubstringName(String substringName){
 		
 		List<Author> authors = new ArrayList<Author>();
 		
-		authorRepositoryImp.findAllBySubstringName(substringName).forEach(authors::add);
+		authorRepository.findAllBySubstringName(substringName).forEach(authors::add);
 		
 		return authors;
 		
@@ -31,7 +32,7 @@ public class AuthorServiceImp implements IAuthorService {
 		
 		if(authorId == null) return false;
 		
-		return authorRepositoryImp.existsById(authorId);
+		return authorRepository.existsById(authorId);
 	}
 
 }

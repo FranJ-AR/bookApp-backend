@@ -7,20 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Subcategory;
-import com.example.repositories.SubcategoryRepositoryImp;
+import com.example.repositories.SubcategoryRepositoryImpl;
 
 @Service
-public class SubcategoryServiceImp implements ISubcategoryService {
+public class SubcategoryServiceImpl implements SubcategoryService {
 	
 	@Autowired
-	private SubcategoryRepositoryImp subcategoryRepositoryImp;
+	private SubcategoryRepositoryImpl subcategoryRepositoryImpl;
 	
 	@Override
 	public List<Subcategory> getAllSubcategories(){
 		
 		List<Subcategory> subcategories = new ArrayList<Subcategory>();
 		
-		subcategoryRepositoryImp.findAllOrderedASC().forEach(subcategories::add);
+		subcategoryRepositoryImpl.findAllOrderedASC().forEach(subcategories::add);
 				
 		return subcategories;
 	}
@@ -30,7 +30,7 @@ public class SubcategoryServiceImp implements ISubcategoryService {
 		
 		if(id == null) return false;
 		
-		return subcategoryRepositoryImp.existsById(id);
+		return subcategoryRepositoryImpl.existsById(id);
 	}
 
 }

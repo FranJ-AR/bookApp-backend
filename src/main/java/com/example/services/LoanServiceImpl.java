@@ -16,13 +16,13 @@ import com.example.model.Book;
 import com.example.model.Loan;
 import com.example.model.LoanKey;
 import com.example.model.User;
-import com.example.repositories.LoanRepositoryImp;
+import com.example.repositories.LoanRepositoryImpl;
 
 @Service
-public class LoanServiceImp implements ILoanService {
+public class LoanServiceImpl implements LoanService {
 	
 	@Autowired
-	private LoanRepositoryImp loanRepositoryImp;
+	private LoanRepositoryImpl loanRepositoryImpl;
 	
 	@Override
 	@Transactional
@@ -42,7 +42,7 @@ public class LoanServiceImp implements ILoanService {
 				Loan.calculateDateReturn(),
 				Loan.calculateMaximumDatePickedUp());
 		
-		loanRepositoryImp.save(loan);
+		loanRepositoryImpl.save(loan);
 				
 	}
 	
@@ -51,7 +51,7 @@ public class LoanServiceImp implements ILoanService {
 		
 		List<Loan> loans = new ArrayList<Loan>();
 		
-		loanRepositoryImp.findLoansByUserId(userId).forEach(loans::add);
+		loanRepositoryImpl.findLoansByUserId(userId).forEach(loans::add);
 		
 		return loans;
 	}
@@ -60,7 +60,7 @@ public class LoanServiceImp implements ILoanService {
 		
 		LoanKey loanKey = new LoanKey(user.getId(), book.getId());
 		
-		Optional<Loan> optionalLoan = loanRepositoryImp.findById(loanKey);
+		Optional<Loan> optionalLoan = loanRepositoryImpl.findById(loanKey);
 		
 		if(optionalLoan.isEmpty()) return null;
 		

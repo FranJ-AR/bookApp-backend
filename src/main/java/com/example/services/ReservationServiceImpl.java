@@ -17,13 +17,13 @@ import com.example.model.Book;
 import com.example.model.Reservation;
 import com.example.model.ReservationKey;
 import com.example.model.User;
-import com.example.repositories.ReservationRepositoryImp;
+import com.example.repositories.ReservationRepositoryImpl;
 
 @Service
-public class ReservationServiceImp implements IReservationService {
+public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
-	private ReservationRepositoryImp reservationRepositoryImp;
+	private ReservationRepositoryImpl reservationRepositoryImpl;
 
 	@Override
 	@Transactional
@@ -43,7 +43,7 @@ public class ReservationServiceImp implements IReservationService {
 
 		Reservation reservation = new Reservation(user, book, ZonedDateTime.now(), reservationKey);
 
-		reservationRepositoryImp.save(reservation);
+		reservationRepositoryImpl.save(reservation);
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class ReservationServiceImp implements IReservationService {
 
 		reservation.removeReservation();
 
-		reservation = reservationRepositoryImp.save(reservation);
+		reservation = reservationRepositoryImpl.save(reservation);
 
-		reservationRepositoryImp.delete(reservation);
+		reservationRepositoryImpl.delete(reservation);
 
 	}
 
@@ -68,7 +68,7 @@ public class ReservationServiceImp implements IReservationService {
 
 		List<Reservation> reservations = new ArrayList<Reservation>();
 
-		reservationRepositoryImp.findReservationsByUserId(long1).forEach(reservations::add);
+		reservationRepositoryImpl.findReservationsByUserId(long1).forEach(reservations::add);
 
 		return reservations;
 	}
@@ -77,7 +77,7 @@ public class ReservationServiceImp implements IReservationService {
 
 		ReservationKey reservationKey = new ReservationKey(user.getId(), book.getId());
 
-		Optional<Reservation> optionalReservation = reservationRepositoryImp.findById(reservationKey);
+		Optional<Reservation> optionalReservation = reservationRepositoryImpl.findById(reservationKey);
 
 		if (optionalReservation.isEmpty())
 			return null;

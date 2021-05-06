@@ -2,7 +2,7 @@ package com.example.repositories;
 
 import com.example.model.Reservation;
 
-public interface IReservationRepository {
+public interface ReservationRepository {
 
 	Iterable<Reservation> findReservationsByUserId(Long userId);
 

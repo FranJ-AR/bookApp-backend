@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.example.model.Book;
 import com.example.model.Category;
-import com.example.repositories.CategoryRepositoryImp;
+import com.example.repositories.CategoryRepositoryImpl;
 
 @Service
-public class CategoryServiceImp implements ICategoryService {
+public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
-	private CategoryRepositoryImp categoryRepositoryImp;
+	private CategoryRepositoryImpl categoryRepositoryImpl;
 	
 	@Override
 	@Deprecated
 	public List<Book> getBooksFromCategory(long categoryId) {
 		
-		Optional<Category> optionalCategory = categoryRepositoryImp.findById(categoryId);
+		Optional<Category> optionalCategory = categoryRepositoryImpl.findById(categoryId);
 		
 		if(! optionalCategory.isPresent() ) return null;
 		
@@ -34,7 +34,7 @@ public class CategoryServiceImp implements ICategoryService {
 		
 		List<Category> categories = new ArrayList<Category>();
 		
-		categoryRepositoryImp.findAllOrderedASC().forEach(categories::add);
+		categoryRepositoryImpl.findAllOrderedASC().forEach(categories::add);
 		
 		return categories;
 	}
@@ -44,7 +44,7 @@ public class CategoryServiceImp implements ICategoryService {
 		
 		if(id == null) return false;
 		
-		return categoryRepositoryImp.existsById(id);
+		return categoryRepositoryImpl.existsById(id);
 	}
 	
 	

@@ -5,13 +5,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.model.User;
-import com.example.repositories.UserRepositoryImp;
+import com.example.repositories.UserRepositoryImpl;
 
 @Service
-public class UserServiceImp implements IUserService {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserRepositoryImp userRepositoryImp;
+	private UserRepositoryImpl userRepositoryImpl;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -19,7 +19,7 @@ public class UserServiceImp implements IUserService {
 	@Override
 	public User loadUser(String userName) {
 		
-		User user = userRepositoryImp.findByName(userName);
+		User user = userRepositoryImpl.findByName(userName);
 		
 		return user;
 		
@@ -38,7 +38,7 @@ public class UserServiceImp implements IUserService {
 		
 		user.setPassword(encodedPassword);
 		
-		userRepositoryImp.save(user);
+		userRepositoryImpl.save(user);
 		
 		return user.getId();
 		

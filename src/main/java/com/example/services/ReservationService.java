@@ -10,7 +10,7 @@ import com.example.model.Book;
 import com.example.model.Reservation;
 import com.example.model.User;
 
-public interface IReservationService {
+public interface ReservationService {
 
 	void createNewReservation(Book book, User user) throws CustomReservationAlreadyExistsException,
 			CustomUserReservationLimitReachedException, CustomCannotReservateLoanAvailableException;

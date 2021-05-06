@@ -9,7 +9,7 @@ import com.example.model.Book;
 import com.example.model.Loan;
 import com.example.model.User;
 
-public interface ILoanService {
+public interface LoanService {
 
 	void createNewLoan(Book book, User user) throws CustomNoCopiesForLoanAvailableException,
 			CustomMaximumUserBooksLoanedException, CustomLoanAlreadyExistsException;

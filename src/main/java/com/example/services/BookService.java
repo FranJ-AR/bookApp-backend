@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.BookParamsFinder;
 import com.example.model.Book;
 
-public interface IBookService {
+public interface BookService {
 
 	List<Book> findAllBooks();
 

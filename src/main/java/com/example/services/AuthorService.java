@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.model.Author;
 
-public interface IAuthorService {
+public interface AuthorService {
 
 	List<Author> findAllBySubstringName(String substringName);
 

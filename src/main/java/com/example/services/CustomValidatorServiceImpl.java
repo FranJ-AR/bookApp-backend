@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import com.example.exceptions.CustomUserPasswordSizeException;
 
 @Component
-public class CustomValidatorServiceImp implements ICustomValidatorService {
+public class CustomValidatorServiceImpl implements CustomValidatorService {
 	
-	public CustomValidatorServiceImp() {
+	public CustomValidatorServiceImpl() {
 		
 		
 	}

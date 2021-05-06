@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.model.Subcategory;
 
-public interface ISubcategoryService {
+public interface SubcategoryService {
 
 	List<Subcategory> getAllSubcategories();
 

@@ -1,10 +1,12 @@
 package com.example.repositories;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.model.Author;
 
-public interface IAuthorRepository {
+@Repository
+public interface AuthorRepository {
 
-	//@Query("SELECT a FROM Author a WHERE a.name ILIKE %:substringName% ORDER BY a.name")
 	Iterable<Author> findAllBySubstringName(String substringName);
 
 	boolean existsById(Long authorId);

@@ -2,7 +2,7 @@ package com.example.repositories;
 
 import com.example.model.User;
 
-public interface IUserRepository {
+public interface UserRepository {
 
 	User findByName(String name);
 

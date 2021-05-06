@@ -9,23 +9,22 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.BookParamsFinder;
 import com.example.model.Book;
-import com.example.repositories.BookRepositoryImp;
-import com.example.repositories.IBookRepository;
+import com.example.repositories.BookRepository;
 
 @Service
-public class BookServiceImp implements IBookService {
+public class BookServiceImpl implements BookService {
 	
 	@Autowired
-	private IBookRepository bookRepository;
+	private BookRepository bookRepository;
 	
 	@Autowired
-	private IAuthorService authorService;
+	private AuthorService authorService;
 	
 	@Autowired
-	private ICategoryService categoryService;
+	private CategoryService categoryService;
 	
 	@Autowired
-	private ISubcategoryService subcategoryService;
+	private SubcategoryService subcategoryService;
 	
 	@Override
 	public List<Book> findAllBooks() {

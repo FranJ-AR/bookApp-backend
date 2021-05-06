@@ -32,42 +32,42 @@ import com.example.model.Loan;
 import com.example.model.Reservation;
 import com.example.model.Subcategory;
 import com.example.model.User;
-import com.example.services.IAuthorService;
-import com.example.services.IBookService;
-import com.example.services.ICategoryService;
-import com.example.services.ICustomValidatorService;
-import com.example.services.ILoanService;
-import com.example.services.IReservationService;
-import com.example.services.ISubcategoryService;
-import com.example.services.IUserService;
+import com.example.services.AuthorService;
+import com.example.services.BookService;
+import com.example.services.CategoryService;
+import com.example.services.CustomValidatorService;
+import com.example.services.LoanService;
+import com.example.services.ReservationService;
+import com.example.services.SubcategoryService;
+import com.example.services.UserService;
 
 @Controller
 //@RequestMapping("/")
 public class AppController {
 
 	@Autowired
-	private IUserService userService;
+	private UserService userService;
 
 	@Autowired
-	private ICustomValidatorService customValidatorService;
+	private CustomValidatorService customValidatorService;
 
 	@Autowired
-	private IBookService bookService;
+	private BookService bookService;
 
 	@Autowired
-	private ICategoryService categoryService;
+	private CategoryService categoryService;
 
 	@Autowired
-	private ISubcategoryService subcategoryService;
+	private SubcategoryService subcategoryService;
 
 	@Autowired
-	private IAuthorService authorService;
+	private AuthorService authorService;
 	
 	@Autowired
-	private ILoanService loanService;
+	private LoanService loanService;
 	
 	@Autowired
-	private IReservationService reservationService;
+	private ReservationService reservationService;
 
 	@CrossOrigin(origins = Constants.HOST_URL)
 	@GetMapping(value = "/private-action", produces = "application/json")

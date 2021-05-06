@@ -2,7 +2,7 @@ package com.example.services;
 
 import com.example.model.User;
 
-public interface IUserService {
+public interface UserService {
 
 	User loadUser(String userName);
 
