@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.Constants;
+import com.example.config.Constants;
 import com.example.exceptions.CustomCannotReservateLoanAvailableException;
 import com.example.exceptions.CustomLoanAlreadyExistsException;
 import com.example.exceptions.CustomMaximumUserBooksLoanedException;

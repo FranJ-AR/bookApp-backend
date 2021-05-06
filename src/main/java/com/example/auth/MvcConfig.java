@@ -3,7 +3,7 @@ package com.example.auth;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.example.demo.Constants;
+import com.example.config.Constants;
 
 //@Configuration
 public class MvcConfig implements WebMvcConfigurer {
