@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import com.example.demo.BookParamsFinder;
 import com.example.model.Book;
 import com.example.repositories.BookRepositoryImp;
+import com.example.repositories.IBookRepository;
 
 @Service
 public class BookServiceImp implements IBookService {
 	
 	@Autowired
-	private BookRepositoryImp bookRepositoryImp;
+	private IBookRepository bookRepository;
 	
 	@Autowired
 	private IAuthorService authorService;
@@ -31,7 +32,7 @@ public class BookServiceImp implements IBookService {
 		
 		List<Book> bookList = new ArrayList<Book>();
 		
-		bookRepositoryImp.findAll().forEach(bookList::add); // Adds books to bookList
+		bookRepository.findAll().forEach(bookList::add); // Adds books to bookList
 		
 		return bookList;
 	}
@@ -57,7 +58,7 @@ public class BookServiceImp implements IBookService {
 		
 		if( !subcategoryService.existsById(subcategoryId)) subcategoryId = (long)-1;
 		
-		Iterable<Book> iterableBook = bookRepositoryImp.findBooksByParams( titleSubstring,
+		Iterable<Book> iterableBook = bookRepository.findBooksByParams( titleSubstring,
 				authorId, categoryId, subcategoryId);
 		
 		List<Book> books = new ArrayList<Book>();
@@ -72,7 +73,7 @@ public class BookServiceImp implements IBookService {
 	@Override
 	public Book findById(long bookId) {
 		
-		Optional<Book> optionalBook = bookRepositoryImp.findById(bookId);
+		Optional<Book> optionalBook = bookRepository.findById(bookId);
 		
 		if(optionalBook.isEmpty()) return null;
 		

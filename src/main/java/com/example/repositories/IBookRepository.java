@@ -1,12 +1,15 @@
 package com.example.repositories;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import java.util.Optional;
 
 import com.example.model.Book;
 
 public interface IBookRepository {
 
 	Iterable<Book> findBooksByParams(String titleSubstring, Long authorId, Long categoryId, Long subcategoryId);
+	
+	Iterable<Book> findAll();
+	
+	Optional<Book> findById(Long bookId);
 
 }
