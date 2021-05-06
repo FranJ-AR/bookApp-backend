@@ -9,32 +9,34 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.BookParamsFinder;
 import com.example.model.Book;
-import com.example.repositories.BookRepository;
+import com.example.repositories.BookRepositoryImp;
 
 @Service
-public class BookService {
+public class BookServiceImp implements IBookService {
 	
 	@Autowired
-	private BookRepository bookRepository;
+	private BookRepositoryImp bookRepositoryImp;
 	
 	@Autowired
-	private AuthorService authorService;
+	private IAuthorService authorService;
 	
 	@Autowired
-	private CategoryService categoryService;
+	private ICategoryService categoryService;
 	
 	@Autowired
-	private SubcategoryService subcategoryService;
+	private ISubcategoryService subcategoryService;
 	
+	@Override
 	public List<Book> findAllBooks() {
 		
 		List<Book> bookList = new ArrayList<Book>();
 		
-		bookRepository.findAll().forEach(bookList::add); // Adds books to bookList
+		bookRepositoryImp.findAll().forEach(bookList::add); // Adds books to bookList
 		
 		return bookList;
 	}
 	
+	@Override
 	public List<Book> findBooksByParams(BookParamsFinder bookParamsFinder){
 		
 		String titleSubstring = bookParamsFinder.getTitleSubstring();
@@ -55,7 +57,7 @@ public class BookService {
 		
 		if( !subcategoryService.existsById(subcategoryId)) subcategoryId = (long)-1;
 		
-		Iterable<Book> iterableBook = bookRepository.findBooksByParams( titleSubstring,
+		Iterable<Book> iterableBook = bookRepositoryImp.findBooksByParams( titleSubstring,
 				authorId, categoryId, subcategoryId);
 		
 		List<Book> books = new ArrayList<Book>();
@@ -67,9 +69,10 @@ public class BookService {
 		
 	}
 	
+	@Override
 	public Book findById(long bookId) {
 		
-		Optional<Book> optionalBook = bookRepository.findById(bookId);
+		Optional<Book> optionalBook = bookRepositoryImp.findById(bookId);
 		
 		if(optionalBook.isEmpty()) return null;
 		

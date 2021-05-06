@@ -5,13 +5,14 @@ import org.springframework.stereotype.Component;
 import com.example.exceptions.CustomUserPasswordSizeException;
 
 @Component
-public class CustomValidatorService {
+public class CustomValidatorServiceImp implements ICustomValidatorService {
 	
-	public CustomValidatorService() {
+	public CustomValidatorServiceImp() {
 		
 		
 	}
 	
+	@Override
 	public boolean isValidSizeUserPassword(String username, String password) throws CustomUserPasswordSizeException {
 		
 		if(username.length() >= 5 && password.length() >= 5) {

@@ -17,14 +17,15 @@ import com.example.model.Book;
 import com.example.model.Reservation;
 import com.example.model.ReservationKey;
 import com.example.model.User;
-import com.example.repositories.ReservationRepository;
+import com.example.repositories.ReservationRepositoryImp;
 
 @Service
-public class ReservationService {
+public class ReservationServiceImp implements IReservationService {
 
 	@Autowired
-	private ReservationRepository reservationRepository;
+	private ReservationRepositoryImp reservationRepositoryImp;
 
+	@Override
 	@Transactional
 	public void createNewReservation(Book book, User user) throws CustomReservationAlreadyExistsException,
 			CustomUserReservationLimitReachedException, CustomCannotReservateLoanAvailableException {
@@ -42,9 +43,10 @@ public class ReservationService {
 
 		Reservation reservation = new Reservation(user, book, ZonedDateTime.now(), reservationKey);
 
-		reservationRepository.save(reservation);
+		reservationRepositoryImp.save(reservation);
 	}
 
+	@Override
 	@Transactional
 	public void deleteReservation(Book book, User user) throws CustomReservationNotExistsException {
 
@@ -55,17 +57,18 @@ public class ReservationService {
 
 		reservation.removeReservation();
 
-		reservation = reservationRepository.save(reservation);
+		reservation = reservationRepositoryImp.save(reservation);
 
-		reservationRepository.delete(reservation);
+		reservationRepositoryImp.delete(reservation);
 
 	}
 
+	@Override
 	public List<Reservation> findReservationsByUserId(Long long1) {
 
 		List<Reservation> reservations = new ArrayList<Reservation>();
 
-		reservationRepository.findReservationsByUserId(long1).forEach(reservations::add);
+		reservationRepositoryImp.findReservationsByUserId(long1).forEach(reservations::add);
 
 		return reservations;
 	}
@@ -74,7 +77,7 @@ public class ReservationService {
 
 		ReservationKey reservationKey = new ReservationKey(user.getId(), book.getId());
 
-		Optional<Reservation> optionalReservation = reservationRepository.findById(reservationKey);
+		Optional<Reservation> optionalReservation = reservationRepositoryImp.findById(reservationKey);
 
 		if (optionalReservation.isEmpty())
 			return null;

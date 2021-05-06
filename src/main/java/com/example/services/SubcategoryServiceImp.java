@@ -7,28 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Subcategory;
-import com.example.repositories.SubcategoryRepository;
+import com.example.repositories.SubcategoryRepositoryImp;
 
 @Service
-public class SubcategoryService {
+public class SubcategoryServiceImp implements ISubcategoryService {
 	
 	@Autowired
-	private SubcategoryRepository subcategoryRepository;
+	private SubcategoryRepositoryImp subcategoryRepositoryImp;
 	
+	@Override
 	public List<Subcategory> getAllSubcategories(){
 		
 		List<Subcategory> subcategories = new ArrayList<Subcategory>();
 		
-		subcategoryRepository.findAllOrderedASC().forEach(subcategories::add);
+		subcategoryRepositoryImp.findAllOrderedASC().forEach(subcategories::add);
 				
 		return subcategories;
 	}
 	
+	@Override
 	public boolean existsById(Long id) {
 		
 		if(id == null) return false;
 		
-		return subcategoryRepository.existsById(id);
+		return subcategoryRepositoryImp.existsById(id);
 	}
 
 }

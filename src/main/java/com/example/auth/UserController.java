@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Constants;
 import com.example.demo.ErrorMessages;
 import com.example.exceptions.CustomUserPasswordSizeException;
-import com.example.services.CustomValidatorService;
+import com.example.services.ICustomValidatorService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
     private JwtService jwtService;
 	@Autowired
-	private CustomValidatorService customValidatorService;
+	private ICustomValidatorService customValidatorService;
  
 	@CrossOrigin(origins = Constants.HOST_URL)
     @PostMapping("/login")

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.example.model.User;
-import com.example.services.UserService;
+import com.example.services.IUserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
-    private UserService userService;
+    private IUserService userService;
  
 	@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

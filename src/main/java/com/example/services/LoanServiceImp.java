@@ -16,14 +16,15 @@ import com.example.model.Book;
 import com.example.model.Loan;
 import com.example.model.LoanKey;
 import com.example.model.User;
-import com.example.repositories.LoanRepository;
+import com.example.repositories.LoanRepositoryImp;
 
 @Service
-public class LoanService {
+public class LoanServiceImp implements ILoanService {
 	
 	@Autowired
-	private LoanRepository loanRepository;
+	private LoanRepositoryImp loanRepositoryImp;
 	
+	@Override
 	@Transactional
 	public void createNewLoan(Book book, User user) 
 			throws CustomNoCopiesForLoanAvailableException, CustomMaximumUserBooksLoanedException, 
@@ -41,15 +42,16 @@ public class LoanService {
 				Loan.calculateDateReturn(),
 				Loan.calculateMaximumDatePickedUp());
 		
-		loanRepository.save(loan);
+		loanRepositoryImp.save(loan);
 				
 	}
 	
-	public List<Loan> findLoansByUserId(Long long1){
+	@Override
+	public List<Loan> findLoansByUserId(Long userId){
 		
 		List<Loan> loans = new ArrayList<Loan>();
 		
-		loanRepository.findLoansByUserId(long1).forEach(loans::add);
+		loanRepositoryImp.findLoansByUserId(userId).forEach(loans::add);
 		
 		return loans;
 	}
@@ -58,7 +60,7 @@ public class LoanService {
 		
 		LoanKey loanKey = new LoanKey(user.getId(), book.getId());
 		
-		Optional<Loan> optionalLoan = loanRepository.findById(loanKey);
+		Optional<Loan> optionalLoan = loanRepositoryImp.findById(loanKey);
 		
 		if(optionalLoan.isEmpty()) return null;
 		
