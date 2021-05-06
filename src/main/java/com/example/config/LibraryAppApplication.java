@@ -26,16 +26,4 @@ public class LibraryAppApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-	// @Bean
-	@Deprecated
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				// registry.addMapping("/prot").allowedOrigins("http://localhost:4200");
-				registry.addMapping("/endpoint").allowedOrigins("http://localhost:4200");
-			}
-		};
-	}
-
 }
