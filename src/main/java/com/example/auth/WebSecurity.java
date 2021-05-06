@@ -27,11 +27,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
  
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	//String pass = passwordEncoder().encode("123");
-    	//auth.inMemoryAuthentication()
-        //.withUser("user1").password(pass).roles("SENSEI");
     	auth.authenticationProvider(daoAuthenticationProvider());
-        //auth.userDetailsService(customUserDetailsService);
     }
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -46,10 +42,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
          .and()
          .authorizeRequests().antMatchers("/login").permitAll()
          .and()
-         .authorizeRequests().antMatchers("/add-default").permitAll()
-         .and()
-         .authorizeRequests().antMatchers("/public-action").permitAll()
-         .and()
          .authorizeRequests().antMatchers("/all-books").permitAll()
          .and()
          .authorizeRequests().antMatchers("/all-categories").permitAll()
@@ -62,9 +54,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
          .and()
          .authorizeRequests().antMatchers("/book/{\\d+}").permitAll()
          .and()
-         //.authorizeRequests().antMatchers("/endpoint").authenticated()
-         //.and()
-         .authorizeRequests().antMatchers("/prot","/private-action",
+         .authorizeRequests().antMatchers(
         		 "/add-loan/{\\d+}","/add-reservation/{\\d+}",
         		 "/remove-reservation/{\\d+}","/loans","/reservations","/user-details").authenticated()
          .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

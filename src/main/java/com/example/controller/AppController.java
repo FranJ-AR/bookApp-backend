@@ -74,45 +74,6 @@ public class AppController {
 	private ReservationService reservationService;
 
 	@CrossOrigin(origins = Constants.HOST_URL)
-	@GetMapping(value = "/private-action", produces = "application/json")
-	public ResponseEntity<Object> logged() {
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-
-		User user = new User(null, currentPrincipalName, "1");
-
-		return new ResponseEntity<Object>(user, HttpStatus.OK);
-
-	}
-
-	@CrossOrigin(origins = Constants.HOST_URL)
-	@GetMapping(value = "/public-action", produces = "application/json")
-	public ResponseEntity<Object> anonym() {
-
-		User user = new User(null, "Anonym", "1");
-
-		return new ResponseEntity<Object>(user, HttpStatus.OK);
-	}
-
-	@CrossOrigin(origins = Constants.HOST_URL)
-	@RequestMapping("/add-default")
-	@ResponseBody
-	public String anyMap() {
-
-		User simpleUser = new User();
-
-		simpleUser.setName("test");
-
-		simpleUser.setPassword("test1");
-
-		userService.saveUser(simpleUser);
-
-		return "Created User";
-
-	}
-
-	@CrossOrigin(origins = Constants.HOST_URL)
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<?> register(@RequestBody(required = false) UserBuilder userBuilder) {
@@ -376,7 +337,6 @@ public class AppController {
 	}
 	
 	//Needs authentification
-	
 	private User getUserAuthentified() {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

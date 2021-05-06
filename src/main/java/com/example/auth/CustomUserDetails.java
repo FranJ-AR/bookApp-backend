@@ -11,9 +11,6 @@ import com.example.model.User;
 
 public class CustomUserDetails implements UserDetails{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7083962747964984799L;
 	
 	private User user;
